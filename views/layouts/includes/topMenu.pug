@@ -1,0 +1,8 @@
+if user
+  li(class=currentUrl=='/manager' ? 'active' : '')
+    a.black-text(href="/manager") Dasboard
+  li
+    a.black-text(href="/logout") Logout
+else
+  li
+    a.black-text(href="/login") Login

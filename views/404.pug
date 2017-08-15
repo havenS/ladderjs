@@ -1,0 +1,11 @@
+extends layouts/error
+
+block content
+  #unknown
+    h1 Looks like you're lost, no ?
+    div
+      | The page  
+      code= currentUrl
+      |  doesn't exist.
+
+    a(id="back-to-home" href="/" class="blue waves-effect waves-light btn-large") Go back to the homepage

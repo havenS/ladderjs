@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+require('dotenv').config()
+process.argv.forEach(function(arg){
+    switch(arg){
+        case 'db:install':
+            require('./db/install')()
+            break
+    }
+})

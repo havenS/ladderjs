@@ -1,0 +1,13 @@
+extends layouts/error
+
+block content
+  #unknown
+    h1 An error occured
+    if error 
+      .row
+        .col.s12
+          .card.black
+            .card-content.red-text
+              p= error
+
+    a#back-to-home.blue.waves-effect.waves-light.btn-large(href='/') Go back to the homepage

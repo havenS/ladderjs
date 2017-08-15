@@ -1,0 +1,32 @@
+extends ../layouts/login
+
+block content
+  .section
+    main
+      center
+        .container
+          .white.row(style='display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;')
+            h5.black-text Create account
+            
+            form.col.s12(method='POST')
+              .row
+                .col.s12
+              .row
+                .input-field.col.s12
+                  input#email.validate(type='email', name='email')
+                  label(for='email') Email
+              .row
+                .input-field.col.s12
+                  input#password.validate(type='password', name='password')
+                  label(for='password') Password
+              .row
+                .input-field.col.s12
+                  input#password_confirmation.validate(type='password', name='password_confirmation')
+                  label(for='password_confirmation') Password verification
+              br
+              center
+                .row
+                  button.col.s12.btn.waves-effect.black.waves-light(type='submit', name='btn_login') Create your account
+            center
+              a.col.s12.black-text(href="/login") I already have an account
+              .row
