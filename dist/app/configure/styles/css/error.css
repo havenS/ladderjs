@@ -1,0 +1,11 @@
+html, body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center; }
+
+#unknown {
+  font-family: 'Work Sans', sans-serif;
+  width: 100%; }
+  #unknown #back-to-home {
+    margin-top: 35px; }

@@ -1,9 +1,39 @@
 #!/usr/bin/env node
 require('dotenv').config()
-process.argv.forEach(function(arg){
-    switch(arg){
-        case 'db:install':
-            require('./db/install')()
-            break
-    }
-})
+const yargs = require('yargs')
+
+yargs
+    .command(
+        'create',
+        'Create the folders for the controllers, models and views. The views are then copied to let you edit theme.',
+        args => {
+            args.option('framework', {
+                describe: 'CSS framework to use, possible values are "bootstrap3", "bootstrap4", "materialize" (which is the default)',
+                default: 'materialize'
+            })
+            args.option('Subfolder', {
+                describe: 'Subfolder in which copy file tree (omit slashs) (exemple: "front" or "../front" not "/front"',
+            })
+        },
+        argv => {
+            require('./files/init')(argv.verbose, argv.framework)
+        }
+    )
+    .command(
+        'db:install',
+        'Populate the database with a simple user table letting you use the authentication system',
+        args => {
+            args.option('dburl', {
+                describe: 'The url string of the db connection like "postgres://me@localhost:5432/mydatabase". If none is passed, the "DATABASE_URL" value set in your ".env" file will be used',
+            })
+        },
+        argv => {
+            require('./db/install')(argv.verbose, argv.dburl)
+        }
+    )
+    .option('verbose', {
+        alias: 'v',
+        default: false
+    })
+    .help()
+    .argv

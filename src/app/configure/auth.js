@@ -1,6 +1,6 @@
 import {
   User
- } from './models'
+ } from '../models'
 
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
@@ -10,14 +10,20 @@ module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
 
+  const AuthModel = app.auth && app.auth.model ? app.auth.model : User
+  const idField = app.auth && app.auth.id ? app.auth.id : 'id'
+  const usernameField = app.auth && app.auth.username ? app.auth.username : 'email'
+  const passwordField = app.auth && app.auth.password ? app.auth.password : 'password'
+  
   passport.use(new LocalStrategy(
     {
-      usernameField: 'email'
+      usernameField,
+      passwordField,
     },
-    function(email, password, done) {
-      User.findOne({
+    function(username, password, done) {
+      AuthModel.findOne({
         where: {
-          'email': email
+          [usernameField]: username
         }
       }).then(function (user) {
         if (user == null) {
@@ -34,13 +40,13 @@ module.exports = app => {
   ))
 
   passport.serializeUser(function(user, done) {
-    done(null, user.id)
+    done(null, user[idField])
   })
 
   passport.deserializeUser(function(id, done) {
-    User.findOne({
+    AuthModel.findOne({
       where: {
-        'id': id
+        [idField]: id
       }
     }).then(function (user) {
       if (user == null) {

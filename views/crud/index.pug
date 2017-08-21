@@ -1,0 +1,12 @@
+extends ../layouts/main
+
+block append content
+  .container
+    .row
+      .col.s9
+        h1= modelName + ' list'
+      .col.s3
+        a.waves-effect.waves-light.btn(href=newUrl) Create new
+    .row
+      .col.s12 
+        include includes/listTable

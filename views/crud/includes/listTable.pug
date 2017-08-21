@@ -1,0 +1,15 @@
+if !entities || entities.length===0
+  .center
+    p You don't have any record yet
+    a.waves-effect.waves-light.btn(href=newUrl) Create new
+else
+  table.striped.responsive-table
+    thead
+      tr
+        each value, field in entities[0]
+          th= field
+    tbody
+      each entity in entities
+        tr
+          each value in entity
+            td= value
