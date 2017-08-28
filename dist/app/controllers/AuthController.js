@@ -18,6 +18,12 @@ var _models = require('../models');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var login = exports.login = function login(req, res, next) {
+  var returnToField = req.body.returnTo;
+  var returnToSession = req.session.returnTo;
+  var returnTo = returnToSession || returnToField || '/';
+
+  delete req.session.returnTo;
+
   _passport2.default.authenticate('local', function (err, user, info) {
     if (err) {
       req.flash('error', 'An error occured, please try again');
@@ -36,8 +42,8 @@ var login = exports.login = function login(req, res, next) {
         next(err);
         return;
       }
-      res.redirect(req.session.returnTo || '/manager');
-      delete req.session.returnTo;
+
+      res.redirect(returnTo);
       return;
     });
   })(req, res, next);
@@ -45,7 +51,8 @@ var login = exports.login = function login(req, res, next) {
 
 var logout = exports.logout = function logout(req, res) {
   req.logout();
-  res.redirect('/');
+  var returnTo = req.params.returnTo || '/login';
+  res.redirect(returnTo);
 };
 
 var signup = exports.signup = function signup(req, res) {

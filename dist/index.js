@@ -1,5 +1,11 @@
 'use strict';
 
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 require('dotenv').config();
 var express = require('express');
 
@@ -11,30 +17,21 @@ var configureSession = require('./app/configure/session');
 var configureRequest = require('./app/configure/request');
 var configureAuth = require('./app/configure/auth');
 
-var ladderjs = function ladderjs(config) {
-  var _config$auth = config.auth,
-      auth = _config$auth === undefined ? null : _config$auth,
-      _config$debugRoutes = config.debugRoutes,
-      debugRoutes = _config$debugRoutes === undefined ? false : _config$debugRoutes,
-      _config$controllersPa = config.controllersPath,
-      controllersPath = _config$controllersPa === undefined ? '/controllers' : _config$controllersPa,
-      _config$loggerLevel = config.loggerLevel,
-      loggerLevel = _config$loggerLevel === undefined ? 'info' : _config$loggerLevel,
-      _config$modelsPath = config.modelsPath,
-      modelsPath = _config$modelsPath === undefined ? '/models' : _config$modelsPath,
-      _config$port = config.port,
-      port = _config$port === undefined ? 8080 : _config$port,
-      _config$publicPath = config.publicPath,
-      publicPath = _config$publicPath === undefined ? '/public' : _config$publicPath,
-      _config$routes = config.routes,
-      routes = _config$routes === undefined ? [] : _config$routes,
-      _config$stylesPath = config.stylesPath,
-      stylesPath = _config$stylesPath === undefined ? '/public/styles' : _config$stylesPath,
-      _config$stylesProcess = config.stylesProcessor,
-      stylesProcessor = _config$stylesProcess === undefined ? 'less' : _config$stylesProcess,
-      _config$viewsPath = config.viewsPath,
-      viewsPath = _config$viewsPath === undefined ? '/views' : _config$viewsPath;
-
+var ladderjs = function ladderjs(conf) {
+  var config = (0, _assign2.default)({}, {
+    auth: null, // model, username field, password field, default login redirect url
+    debugRoutes: false,
+    controllersPath: '/controllers',
+    loggerLevel: 'info',
+    modelsPath: '/models',
+    port: 8080,
+    publicPath: '/public',
+    routes: [],
+    stylesPath: '/public/styles',
+    stylesProcessor: 'less',
+    viewsPath: '/views',
+    disabledRoutes: []
+  }, conf);
 
   var app = express();
 

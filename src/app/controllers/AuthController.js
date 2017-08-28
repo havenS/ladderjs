@@ -3,6 +3,12 @@ import bcrypt from 'bcrypt'
 import { User } from '../models'
 
 export const login = (req, res, next) => {
+  const returnToField = req.body.returnTo
+  const returnToSession = req.session.returnTo
+  const returnTo = returnToSession || returnToField ||  '/'
+
+  delete req.session.returnTo
+
   passport.authenticate('local', function(err, user, info) {
     if (err) {
       req.flash('error', 'An error occured, please try again');
@@ -21,8 +27,8 @@ export const login = (req, res, next) => {
         next(err);
         return
       }
-      res.redirect(req.session.returnTo || '/manager');
-      delete req.session.returnTo
+
+      res.redirect(returnTo);
       return
     });
   })(req, res, next)
@@ -30,7 +36,8 @@ export const login = (req, res, next) => {
 
 export const logout = (req, res) => {
   req.logout()
-  res.redirect('/')
+  const returnTo = req.params.returnTo || '/login'
+  res.redirect(returnTo)
 }
 
 export const signup = (req, res) => {

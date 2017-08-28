@@ -6,6 +6,7 @@ var sequelize = require('../sequelize');
 module.exports = function (app, config) {
   app.auth = config.auth;
   app.routesToAdd = config.routes;
+  app.disabledRoutes = config.disabledRoutes;
   app.controllersPath = '' + process.cwd() + config.controllersPath;
   app.modelsPath = '' + process.cwd() + config.modelsPath;
   app.db = sequelize;
