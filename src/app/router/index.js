@@ -48,6 +48,7 @@ const processUrl = ({action, auth, controller, method, url, view}, app) => async
     if (data) {
       return view ? res.render(viewPath, data) : respond(res, data)
     }
+    return data
   } catch (err) {
     app.logger.error(err)
     return res.status(500).render('500', {error: String(err)})
@@ -133,27 +134,30 @@ module.exports = app => {
     ...(app.routesToAdd || []),
     ...appRoutes,
   ]
-  routes.forEach(config => {
-    if (config.crud) {
-      const crudRoutes = getCrudRoutes(config.url)
-      Object.keys(crudRoutes).forEach(type => {
-        const {url, method} = crudRoutes[type]
-        const model = require(`${app.modelsPath}/${config.model}`)
-        const Model = model.default ? model.default(app.db) : model(app.db)
-        app[method](
-          app.ladderjs.getUrl(url),
+
+  routes
+    .filter(route => !app.disabledRoutes.includes(route.url))
+    .forEach(config => {
+      if (config.crud) {
+        const crudRoutes = getCrudRoutes(config.url)
+        Object.keys(crudRoutes).forEach(type => {
+          const {url, method} = crudRoutes[type]
+          const model = require(`${app.modelsPath}/${config.model}`)
+          const Model = model.default ? model.default(app.db) : model(app.db)
+          app[method](
+            app.ladderjs.getUrl(url),
+            authenticateUrl(config.auth),
+            processCrud(type, config, crudRoutes, Model)
+          )
+        })
+      } else {
+        app[config.method](
+          app.ladderjs.getUrl(config.url, app),
           authenticateUrl(config.auth),
-          processCrud(type, config, crudRoutes, Model)
+          processUrl(config, app)
         )
-      })
-    } else {
-      app[config.method](
-        app.ladderjs.getUrl(config.url, app),
-        authenticateUrl(config.auth),
-        processUrl(config, app)
-      )
-    }
-  })
+      }
+    })
 
   return app
 }

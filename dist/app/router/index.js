@@ -131,22 +131,21 @@ var processUrl = function processUrl(_ref, app) {
               return _context.abrupt('return', view ? res.render(viewPath, data) : respond(res, data));
 
             case 26:
-              _context.next = 32;
-              break;
+              return _context.abrupt('return', data);
 
-            case 28:
-              _context.prev = 28;
+            case 29:
+              _context.prev = 29;
               _context.t2 = _context['catch'](20);
 
               app.logger.error(_context.t2);
               return _context.abrupt('return', res.status(500).render('500', { error: String(_context.t2) }));
 
-            case 32:
+            case 33:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, undefined, [[6, 10], [12, 16], [20, 28]]);
+      }, _callee, undefined, [[6, 10], [12, 16], [20, 29]]);
     }));
 
     return function (_x2, _x3, _x4) {
@@ -244,7 +243,7 @@ var processCrud = function processCrud(type, _ref3, crudRoutes, Model) {
               return _context2.abrupt('return', res.render(viewPath, data));
 
             case 10:
-              return _context2.abrupt('return', res.redirect(req.ladderjs.getUrl(crudRoutes.index.url, req.ladderjs)));
+              return _context2.abrupt('return', res.redirect(crudRoutes.index.url));
 
             case 11:
             case 'end':
@@ -262,7 +261,10 @@ var processCrud = function processCrud(type, _ref3, crudRoutes, Model) {
 
 module.exports = function (app) {
   var routes = [].concat((0, _toConsumableArray3.default)(app.routesToAdd || []), (0, _toConsumableArray3.default)(_routes2.default));
-  routes.forEach(function (config) {
+
+  routes.filter(function (route) {
+    return !app.disabledRoutes.includes(route.url);
+  }).forEach(function (config) {
     if (config.crud) {
       var crudRoutes = getCrudRoutes(config.url);
       (0, _keys2.default)(crudRoutes).forEach(function (type) {
@@ -272,10 +274,10 @@ module.exports = function (app) {
 
         var model = require(app.modelsPath + '/' + config.model);
         var Model = model.default ? model.default(app.db) : model(app.db);
-        app[method](app.ladderjs.getUrl(url), authenticateUrl(config.auth), processCrud(type, config, crudRoutes, Model));
+        app[method](url, authenticateUrl(config.auth), processCrud(type, config, crudRoutes, Model));
       });
     } else {
-      app[config.method](app.ladderjs.getUrl(config.url, app), authenticateUrl(config.auth), processUrl(config, app));
+      app[config.method](config.url, authenticateUrl(config.auth), processUrl(config, app));
     }
   });
 

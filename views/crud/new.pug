@@ -6,7 +6,7 @@ block append content
       .col.s12
         h1= 'Create new ' + modelName
     .row
-      form(method='POST', url=createUrl)
+      form(method='POST', action=createUrl)
         .col.s12 
           each field in fields
             if !field.auto
