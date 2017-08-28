@@ -4,14 +4,14 @@ const yargs = require('yargs')
 
 yargs
     .command(
-        'create',
-        'Create the folders for the controllers, models and views. The views are then copied to let you edit theme.',
+        'extract',
+        'extract the folders for the controllers, the models and/or the views. The files are then copied to let you cutomize the LadderJS behaviours.',
         args => {
             args.option('framework', {
                 describe: 'CSS framework to use, possible values are "bootstrap3", "bootstrap4", "materialize" (which is the default)',
                 default: 'materialize'
             })
-            args.option('Subfolder', {
+            args.option('subfolder', {
                 describe: 'Subfolder in which copy file tree (omit slashs) (exemple: "front" or "../front" not "/front"',
             })
         },
