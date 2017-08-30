@@ -19,6 +19,7 @@ var configureAuth = require('./app/configure/auth');
 
 var ladderjs = function ladderjs(conf) {
   var config = (0, _assign2.default)({}, {
+    apiPrefix: null,
     auth: null, // model, username field, password field, default login redirect url
     debugRoutes: false,
     controllersPath: '/controllers',

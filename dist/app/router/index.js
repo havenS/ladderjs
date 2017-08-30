@@ -273,10 +273,10 @@ module.exports = function (app) {
 
         var model = require(app.modelsPath + '/' + config.model);
         var Model = model.default ? model.default(app.db) : model(app.db);
-        app[method](url, authenticateUrl(config.auth), processCrud(type, config, crudRoutes, Model));
+        app[method](app.apiPrefix ? '' + app.apiPrefix + url : url, authenticateUrl(config.auth), processCrud(type, config, crudRoutes, Model));
       });
     } else {
-      app[config.method](config.url, authenticateUrl(config.auth), processUrl(config, app));
+      app[config.method](app.apiPrefix ? '' + app.apiPrefix + config.url : config.url, authenticateUrl(config.auth), processUrl(config, app));
     }
   });
 

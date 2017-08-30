@@ -11,6 +11,7 @@ const configureAuth = require('./app/configure/auth')
 
 const ladderjs = (conf) => {
   const config = Object.assign({}, {
+    apiPrefix: null,
     auth: null, // model, username field, password field, default login redirect url
     debugRoutes: false,
     controllersPath: '/controllers',

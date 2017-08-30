@@ -142,14 +142,14 @@ module.exports = app => {
         const model = require(`${app.modelsPath}/${config.model}`)
         const Model = model.default ? model.default(app.db) : model(app.db)
         app[method](
-          url,
+          app.apiPrefix ? `${app.apiPrefix}${url}` : url,
           authenticateUrl(config.auth),
           processCrud(type, config, crudRoutes, Model)
         )
       })
     } else {
       app[config.method](
-        config.url,
+        app.apiPrefix ? `${app.apiPrefix}${config.url}` : config.url,
         authenticateUrl(config.auth),
         processUrl(config, app)
       )
