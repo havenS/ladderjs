@@ -21,7 +21,7 @@ const getView = (view, url, crudType) => {
   return crudType ? `crud/${crudType}` : url.replace('/', '')
 }
 
-const processUrl = ({action, auth, controller, method, url, view}) => async (req, res, next) => {
+const processUrl = ({action, auth, controller, method, url, view}, app) => async (req, res, next) => {
   if (req.error) {
     return respond(res, null, req.error)
   }
@@ -150,7 +150,7 @@ module.exports = app => {
       app[config.method](
         app.ladderjs.getUrl(config.url, app),
         authenticateUrl(config.auth),
-        processUrl(config)
+        processUrl(config, app)
       )
     }
   })

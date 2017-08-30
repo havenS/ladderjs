@@ -60,7 +60,7 @@ var getView = function getView(view, url, crudType) {
   return crudType ? 'crud/' + crudType : url.replace('/', '');
 };
 
-var processUrl = function processUrl(_ref) {
+var processUrl = function processUrl(_ref, app) {
   var action = _ref.action,
       auth = _ref.auth,
       controller = _ref.controller,
@@ -275,7 +275,7 @@ module.exports = function (app) {
         app[method](app.ladderjs.getUrl(url), authenticateUrl(config.auth), processCrud(type, config, crudRoutes, Model));
       });
     } else {
-      app[config.method](app.ladderjs.getUrl(config.url, app), authenticateUrl(config.auth), processUrl(config));
+      app[config.method](app.ladderjs.getUrl(config.url, app), authenticateUrl(config.auth), processUrl(config, app));
     }
   });
 
