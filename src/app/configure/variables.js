@@ -2,7 +2,12 @@ const moment = require('moment')
 const sequelize = require('../sequelize')
 
 module.exports = (app, config) => {
-  app.apiPrefix = config.apiPrefix || process.env.API_PREFIX
+  const apiPrefix = config.apiPrefix || process.env.API_PREFIX
+
+  app.ladderjs = {
+    apiPrefix: apiPrefix,
+    getUrl: url => apiPrefix ? `${apiPrefix}${url}` : url,
+  }
   app.auth = config.auth
   app.routesToAdd = config.routes
   app.disabledRoutes = config.disabledRoutes

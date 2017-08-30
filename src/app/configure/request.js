@@ -27,6 +27,11 @@ module.exports = (app, config) => {
   )
 
   app.use((req, res, next) => {
+    req.ladderjs = app.ladderjs
+    next()
+  })
+
+  app.use((req, res, next) => {
     res.locals.messages = {}
     try {
       res.locals.messages.error = req.flash('error')
@@ -34,9 +39,10 @@ module.exports = (app, config) => {
     } catch (e) {}
     res.locals.user = req.user
     res.locals.currentUrl = req.originalUrl
+    res.locals.getUrl = req.ladderjs.getUrl
     
     next()
-  });
+  })
 
   addRoutes(app)
 

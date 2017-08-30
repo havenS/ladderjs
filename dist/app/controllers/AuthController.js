@@ -27,13 +27,13 @@ var login = exports.login = function login(req, res, next) {
   _passport2.default.authenticate('local', function (err, user, info) {
     if (err) {
       req.flash('error', 'An error occured, please try again');
-      res.redirect('/login');
+      res.redirect(req.ladderjs.getUrl('/login'));
       return;
     }
 
     if (!user) {
       req.flash('error', 'Invalid email or password');
-      res.redirect('/login');
+      res.redirect(req.ladderjs.getUrl('/login'));
       return;
     }
     req.logIn(user, function (err) {
@@ -43,7 +43,7 @@ var login = exports.login = function login(req, res, next) {
         return;
       }
 
-      res.redirect(returnTo);
+      res.redirect(req.ladderjs.getUrl(returnTo));
       return;
     });
   })(req, res, next);
@@ -52,7 +52,7 @@ var login = exports.login = function login(req, res, next) {
 var logout = exports.logout = function logout(req, res) {
   req.logout();
   var returnTo = req.params.returnTo || '/login';
-  res.redirect(returnTo);
+  res.redirect(req.ladderjs.getUrl(returnTo));
 };
 
 var signup = exports.signup = function signup(req, res) {
@@ -62,7 +62,7 @@ var signup = exports.signup = function signup(req, res) {
 
   if (!email || !password || !password_confirmation) {
     req.flash('error', "All fields are required");
-    return res.redirect('/create-account');
+    return res.redirect(req.ladderjs.getUrl('/create-account'));
   }
 
   var salt = _bcrypt2.default.genSaltSync(10);
@@ -75,9 +75,9 @@ var signup = exports.signup = function signup(req, res) {
   };
 
   _models.User.create(newUser).then(function () {
-    res.redirect('/login');
+    res.redirect(req.ladderjs.getUrl('/login'));
     _passport2.default.authenticate('local', {
-      successRedirect: '/manager'
+      successRedirect: req.ladderjs.getUrl('/manager')
     })({
       body: { email: email, password: password }
     });
@@ -92,6 +92,6 @@ var signup = exports.signup = function signup(req, res) {
         break;
     }
     req.flash('error', message);
-    res.redirect('/create-account');
+    res.redirect(req.ladderjs.getUrl('/create-account'));
   });
 };

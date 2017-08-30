@@ -60,7 +60,7 @@ var getView = function getView(view, url, crudType) {
   return crudType ? 'crud/' + crudType : url.replace('/', '');
 };
 
-var processUrl = function processUrl(_ref, app) {
+var processUrl = function processUrl(_ref) {
   var action = _ref.action,
       auth = _ref.auth,
       controller = _ref.controller,
@@ -244,7 +244,7 @@ var processCrud = function processCrud(type, _ref3, crudRoutes, Model) {
               return _context2.abrupt('return', res.render(viewPath, data));
 
             case 10:
-              return _context2.abrupt('return', res.redirect(crudRoutes.index.url));
+              return _context2.abrupt('return', res.redirect(req.ladderjs.getUrl(crudRoutes.index.url, req.ladderjs)));
 
             case 11:
             case 'end':
@@ -262,7 +262,6 @@ var processCrud = function processCrud(type, _ref3, crudRoutes, Model) {
 
 module.exports = function (app) {
   var routes = [].concat((0, _toConsumableArray3.default)(app.routesToAdd || []), (0, _toConsumableArray3.default)(_routes2.default));
-
   routes.forEach(function (config) {
     if (config.crud) {
       var crudRoutes = getCrudRoutes(config.url);
@@ -273,10 +272,10 @@ module.exports = function (app) {
 
         var model = require(app.modelsPath + '/' + config.model);
         var Model = model.default ? model.default(app.db) : model(app.db);
-        app[method](app.apiPrefix ? '' + app.apiPrefix + url : url, authenticateUrl(config.auth), processCrud(type, config, crudRoutes, Model));
+        app[method](app.ladderjs.getUrl(url), authenticateUrl(config.auth), processCrud(type, config, crudRoutes, Model));
       });
     } else {
-      app[config.method](app.apiPrefix ? '' + app.apiPrefix + config.url : config.url, authenticateUrl(config.auth), processUrl(config, app));
+      app[config.method](app.ladderjs.getUrl(config.url, app), authenticateUrl(config.auth), processUrl(config));
     }
   });
 

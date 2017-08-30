@@ -23,6 +23,11 @@ module.exports = function (app, config) {
   app.use('/', [express.static('' + process.cwd() + config.publicPath), express.static(__dirname + '/../../..')]);
 
   app.use(function (req, res, next) {
+    req.ladderjs = app.ladderjs;
+    next();
+  });
+
+  app.use(function (req, res, next) {
     res.locals.messages = {};
     try {
       res.locals.messages.error = req.flash('error');
@@ -30,6 +35,7 @@ module.exports = function (app, config) {
     } catch (e) {}
     res.locals.user = req.user;
     res.locals.currentUrl = req.originalUrl;
+    res.locals.getUrl = req.ladderjs.getUrl;
 
     next();
   });

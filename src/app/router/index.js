@@ -21,7 +21,7 @@ const getView = (view, url, crudType) => {
   return crudType ? `crud/${crudType}` : url.replace('/', '')
 }
 
-const processUrl = ({action, auth, controller, method, url, view}, app) => async (req, res, next) => {
+const processUrl = ({action, auth, controller, method, url, view}) => async (req, res, next) => {
   if (req.error) {
     return respond(res, null, req.error)
   }
@@ -124,7 +124,7 @@ const processCrud = (type, {model, url, view}, crudRoutes, Model) => async (req,
     }
     return res.render(viewPath, data)
   } else {
-    return res.redirect(crudRoutes.index.url)
+    return res.redirect(req.ladderjs.getUrl(crudRoutes.index.url, req.ladderjs))
   }
 }
 
@@ -133,7 +133,6 @@ module.exports = app => {
     ...(app.routesToAdd || []),
     ...appRoutes,
   ]
-
   routes.forEach(config => {
     if (config.crud) {
       const crudRoutes = getCrudRoutes(config.url)
@@ -142,16 +141,16 @@ module.exports = app => {
         const model = require(`${app.modelsPath}/${config.model}`)
         const Model = model.default ? model.default(app.db) : model(app.db)
         app[method](
-          app.apiPrefix ? `${app.apiPrefix}${url}` : url,
+          app.ladderjs.getUrl(url),
           authenticateUrl(config.auth),
           processCrud(type, config, crudRoutes, Model)
         )
       })
     } else {
       app[config.method](
-        app.apiPrefix ? `${app.apiPrefix}${config.url}` : config.url,
+        app.ladderjs.getUrl(config.url, app),
         authenticateUrl(config.auth),
-        processUrl(config, app)
+        processUrl(config)
       )
     }
   })
