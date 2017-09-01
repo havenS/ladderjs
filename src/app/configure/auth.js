@@ -48,11 +48,7 @@ module.exports = app => {
       where: {
         [idField]: id
       }
-    }).then(function (user) {
-      if (user == null) {
-        done(new Error('Wrong user id.'))
-      }
-      
+    }).then(function (user) {     
       done(null, user)
     })
   })

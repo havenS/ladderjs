@@ -48,10 +48,6 @@ module.exports = function (app) {
     AuthModel.findOne({
       where: (0, _defineProperty3.default)({}, idField, id)
     }).then(function (user) {
-      if (user == null) {
-        done(new Error('Wrong user id.'));
-      }
-
       done(null, user);
     });
   });
