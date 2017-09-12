@@ -243,7 +243,7 @@ var processCrud = function processCrud(type, _ref3, crudRoutes, Model) {
               return _context2.abrupt('return', res.render(viewPath, data));
 
             case 10:
-              return _context2.abrupt('return', res.redirect(crudRoutes.index.url));
+              return _context2.abrupt('return', res.redirect(req.ladderjs.getUrl(crudRoutes.index.url, req.ladderjs)));
 
             case 11:
             case 'end':
@@ -274,10 +274,10 @@ module.exports = function (app) {
 
         var model = require(app.modelsPath + '/' + config.model);
         var Model = model.default ? model.default(app.db) : model(app.db);
-        app[method](url, authenticateUrl(config.auth), processCrud(type, config, crudRoutes, Model));
+        app[method](app.ladderjs.getUrl(url), authenticateUrl(config.auth), processCrud(type, config, crudRoutes, Model));
       });
     } else {
-      app[config.method](config.url, authenticateUrl(config.auth), processUrl(config, app));
+      app[config.method](app.ladderjs.getUrl(config.url, app), authenticateUrl(config.auth), processUrl(config, app));
     }
   });
 

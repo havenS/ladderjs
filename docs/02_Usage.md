@@ -1,19 +1,45 @@
 # Usage
 
+## Configure database
+To use **LadderJS** you need a Postgre SQL database.
+
+First, create a Postgre SQL database:
+```console
+$ createdb <DATABASE>
+```
+
+Then, add a `.env` file at the root of your project:
+**/.env**
+```
+# The database connection string
+DATABASE_URL=postgres://<USER>:<PASSWORD>@<DATABASE>
+# Enable the Sequelize logging, disabled by default
+DB_LOGGING=true
+```
+
+## Create LadderJS instance
 To start using **LadderJS** simply create an `index.js` file containing the following:
 
 ```js
-import ladderjs from 'ladderjs'
+const ladderjs = require('ladderjs')
 
 const options = {}
-const app = ladderjs()
 
+const app = ladderjs(options)
 app.start()
-
 ```
+
 Then launch it use the command: 
+
 ```console
 $ node .
 ```
 
 You'll then have have a basic website, configured using all the default settings (check it in the **configuration** page). The basic app is using MaterializeCSS as CSS-JS framework, and shows a homepage, a login/signup pages, and a protected page.
+
+## NB
+If you use Nodemon or any other file monitor, be sure tu exclude the `sessions` folder and the `*.log` files:
+
+```console
+$ nodemon . -i sessions -i *.log
+```
