@@ -10,3 +10,5 @@ By using **LadderJS**, you'll benefit from the included:
  - Logger: using Winston
  - Style layer: using LESS or SASS
  - CRUD scaffolding
+
+A demo app can be used as a boilerplate if you want to skip the first steps of the documentation.
