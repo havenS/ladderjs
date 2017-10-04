@@ -5,13 +5,19 @@ module.exports = {
   },
   extends: "eslint:recommended",
   parserOptions: {
-    sourceType: "module"
+    ecmaVersion: 8,
+    sourceType: "module",
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true
+    }
   },
+  plugins: ["babel"],
   rules: {
     indent: ["error", 2],
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "single"],
     semi: ["error", "never"],
-    "comma-dangle": ["error", "always-multiline"]
+    "comma-dangle": ["error", "always-multiline"],
+    "babel/object-curly-spacing": 1
   }
 }

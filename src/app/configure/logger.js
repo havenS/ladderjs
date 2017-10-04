@@ -9,8 +9,8 @@ module.exports = (app, config) => {
         json: false,
         colorize: true,
         timestamp() {
-          const d = new Date();
-          return d.toISOString();
+          const d = new Date()
+          return d.toISOString()
         },
       }),
       new winston.transports.File({
@@ -18,6 +18,6 @@ module.exports = (app, config) => {
         maxsize: 5242880,
       }),
     ],
-  });
+  })
   app.logger = logger
 }

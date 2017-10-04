@@ -1,17 +1,17 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.default = [{
-    "description": "home",
-    "method": "get",
-    "url": "/",
-    "view": "index"
+  'description': 'home',
+  'method': 'get',
+  'url': '/',
+  'view': 'index'
 }, {
-    "description": "Dashboard",
-    "method": "get",
-    "url": "/manager",
-    "auth": 'isAuthenticated',
-    "view": "manager"
+  'description': 'Dashboard',
+  'method': 'get',
+  'url': '/manager',
+  'auth': 'isAuthenticated',
+  'view': 'manager'
 }];

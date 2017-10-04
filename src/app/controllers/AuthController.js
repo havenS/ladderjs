@@ -1,15 +1,14 @@
 import passport from 'passport'
-import bcrypt from 'bcrypt'
-import { User } from '../models'
+import {User} from '../models'
 
 export const login = (req, res, next) => {
   const returnToField = req.body.returnTo
   const returnToSession = req.session.returnTo
-  const returnTo = returnToSession || returnToField ||  '/'
+  const returnTo = returnToSession || returnToField || '/'
 
   delete req.session.returnTo
 
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', function(err, user) {
     if (err) {
       req.flash('error', 'An error occured, please try again')
       res.redirect(req.ladderjs.getUrl('/login'))
@@ -22,7 +21,7 @@ export const login = (req, res, next) => {
       return
     }
     req.logIn(user, function(err) {
-      if ( err ) {
+      if (err) {
         req.flash('error', 'Invalid email or password')
         next(err)
         return
@@ -30,7 +29,7 @@ export const login = (req, res, next) => {
 
       res.redirect(req.ladderjs.getUrl(returnTo))
       return
-    });
+    })
   })(req, res, next)
 }
 
@@ -44,39 +43,38 @@ export const signup = (req, res) => {
   var email = req.body.email
   var password = req.body.password
   var password_confirmation = req.body.password_confirmation
-  
+
   if (!email || !password || !password_confirmation) {
-    req.flash('error', "All fields are required")
+    req.flash('error', 'All fields are required')
     return res.redirect(req.ladderjs.getUrl('/create-account'))
   }
-  
-  var salt = bcrypt.genSaltSync(10)
-  var hashedPassword = bcrypt.hashSync(password, salt)
-  
+
   var newUser = {
     email,
     password,
     password_confirmation,
   }
-  
-  User.create(newUser).then(function() {
-    res.redirect(req.ladderjs.getUrl('/login'))
-    passport.authenticate('local', {
-      successRedirect: req.ladderjs.getUrl('/manager'),
-    })({
-      body: { email, password },
+
+  User.create(newUser)
+    .then(function() {
+      res.redirect(req.ladderjs.getUrl('/login'))
+      passport.authenticate('local', {
+        successRedirect: req.ladderjs.getUrl('/manager'),
+      })({
+        body: {email, password},
+      })
     })
-  }).catch(function(error) {
-    let message
-    switch(error.name) {
+    .catch(function(error) {
+      let message
+      switch (error.name) {
       case 'SequelizeUniqueConstraintError':
         message = 'An account using this email address already exists'
         break
       default:
         message = error.message
         break
-    }
-    req.flash('error', message)
-    res.redirect(req.ladderjs.getUrl('/create-account'))
-  })
+      }
+      req.flash('error', message)
+      res.redirect(req.ladderjs.getUrl('/create-account'))
+    })
 }

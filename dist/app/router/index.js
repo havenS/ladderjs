@@ -62,9 +62,7 @@ var getView = function getView(view, url, crudType) {
 
 var processUrl = function processUrl(_ref, app) {
   var action = _ref.action,
-      auth = _ref.auth,
       controller = _ref.controller,
-      method = _ref.method,
       url = _ref.url,
       view = _ref.view;
   return function () {
@@ -216,7 +214,7 @@ var processCrud = function processCrud(type, _ref3, crudRoutes, Model) {
       url = _ref3.url,
       view = _ref3.view;
   return function () {
-    var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(req, res, next) {
+    var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(req, res) {
       var action, viewPath, data;
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
@@ -253,7 +251,7 @@ var processCrud = function processCrud(type, _ref3, crudRoutes, Model) {
       }, _callee2, undefined);
     }));
 
-    return function (_x5, _x6, _x7) {
+    return function (_x5, _x6) {
       return _ref4.apply(this, arguments);
     };
   }();

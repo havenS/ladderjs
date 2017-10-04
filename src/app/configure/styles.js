@@ -10,7 +10,7 @@ module.exports = (app, config) => {
       debug: false,
       outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'extended',
       prefix: '/styles',
-    }));
+    }))
     app.use('/styles', express.static(`${process.cwd()}${config.publicPath}/styles`))
     
     app.use(sassMiddleware({
@@ -19,7 +19,7 @@ module.exports = (app, config) => {
       debug: false,
       outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'extended',
       prefix: '/styles',
-    }));
+    }))
     app.use('/styles', express.static(`${__dirname}/public/styles`))
   } else {
     app.use('/styles', [
@@ -32,6 +32,6 @@ module.exports = (app, config) => {
         cache: process.env.NODE_ENV === 'production',
         compress: process.env.NODE_ENV === 'production',
       }), 
-    ]);
+    ])
   }
 }

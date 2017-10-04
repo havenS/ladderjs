@@ -87,10 +87,10 @@ var options = {
   indexes: [{ unique: true, fields: ['email'] }]
 };
 
-var hasSecurePassword = function hasSecurePassword(user, options, callback) {
+var hasSecurePassword = function hasSecurePassword(user) {
   return new _promise2.default(function (resolve, reject) {
     if (user.password != user.password_confirmation) {
-      throw new Error("Le mot de passe et sa confirmation doivent être identiques");
+      throw new Error('Le mot de passe et sa confirmation doivent être identiques');
     }
     _bcrypt2.default.hash(user.password, 10, function (err, hash) {
       if (err) {

@@ -3,7 +3,7 @@ export const indexEntity = async (req, res, Model, logger) => {
   const entities = await Model.findAll()
   
   return {
-    entities
+    entities,
   }
 }
 

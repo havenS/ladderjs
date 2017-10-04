@@ -32,7 +32,9 @@ module.exports = function (app, config) {
     try {
       res.locals.messages.error = req.flash('error');
       res.locals.messages.success = req.flash('success');
-    } catch (e) {}
+    } catch (e) {
+      app.error(e);
+    }
     res.locals.user = req.user;
     res.locals.currentUrl = req.originalUrl;
     res.locals.getUrl = req.ladderjs.getUrl;
@@ -45,7 +47,7 @@ module.exports = function (app, config) {
   app.use(function (req, res) {
     res.status(404).render('404');
   });
-  app.use(function (err, req, res, next) {
+  app.use(function (err, req, res) {
     app.logger.error(err);
     res.status(500).render('500');
   });

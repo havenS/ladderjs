@@ -9,8 +9,7 @@ var _models = require('../models');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    bcrypt = require('bcrypt');
+    LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function (app) {
   app.use(passport.initialize());
