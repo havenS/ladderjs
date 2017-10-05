@@ -8,7 +8,7 @@
 
 ### Async include filter
 ```
-  :async-include(route='/lai/test')
+  div!=ainclude(route='/lai/test')
 ```
 ### Async route configuration
 ```
