@@ -7,8 +7,18 @@
 ## Async rendering
 
 ### Async include filter
+ainclude(route, loadingElement = '', errorElement = '')
 ```
-  div!=ainclude(route='/lai/test')
+  div!=ainclude('/lai/test')
+```
+
+```
+app.locals.loadingElement = '<img src="/img/loader.svg"/>'
+app.locals.errorElement = '<img src="/img/error.svg"/>'
+```
+or
+```
+  div!=ainclude('/lai/test', '<img src="/img/loader.svg"/>', '<img src="/img/error.svg"/>')
 ```
 ### Async route configuration
 ```
