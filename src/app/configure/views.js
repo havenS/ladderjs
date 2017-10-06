@@ -15,7 +15,6 @@ module.exports = (app, config) => {
     loadingElement = app.locals.loadingElement,
     errorElement = app.locals.errorElement
   ) => {
-    console.log(route, loadingElement, errorElement)
     const id = randomID(10)
     return `<div id="${id}">${loadingElement}</div>
       <script type="text/javascript">

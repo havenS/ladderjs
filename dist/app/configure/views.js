@@ -17,7 +17,6 @@ module.exports = function (app, config) {
     var loadingElement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : app.locals.loadingElement;
     var errorElement = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : app.locals.errorElement;
 
-    console.log(route, loadingElement, errorElement);
     var id = (0, _randomId2.default)(10);
     return '<div id="' + id + '">' + loadingElement + '</div>\n      <script type="text/javascript">\n        $(function(){\n          $.post(\'/lai\', {route: \'' + route + '\'})\n            .done(function(data){\n              $(\'#' + id + '\').html(data)\n            })\n            .error(function(){\n              $(\'#' + id + '\').html(\'' + errorElement + '\')\n            })\n        })\n      </script>\n      ';
   };
