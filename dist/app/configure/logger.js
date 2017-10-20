@@ -1,22 +1,36 @@
 'use strict';
 
-var winston = require('winston');
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.configureLogger = undefined;
 
-module.exports = function (app, config) {
-  var logger = new winston.Logger({
-    level: config.loggerLevel || 'info',
-    transports: [new winston.transports.Console({
-      handleExceptions: true,
-      json: false,
-      colorize: true,
-      timestamp: function timestamp() {
-        var d = new Date();
-        return d.toISOString();
-      }
-    }), new winston.transports.File({
-      filename: process.cwd() + '/ladderjs.log',
-      maxsize: 5242880
-    })]
-  });
+var _winston = require('winston');
+
+var _winston2 = _interopRequireDefault(_winston);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var logger = new _winston2.default.Logger({
+  level: 'info',
+  transports: [new _winston2.default.transports.Console({
+    handleExceptions: true,
+    json: false,
+    colorize: true,
+    timestamp: function timestamp() {
+      var d = new Date();
+      return d.toISOString();
+    }
+  }), new _winston2.default.transports.File({
+    filename: process.cwd() + '/ladderjs.log',
+    maxsize: 5242880
+  })]
+});
+
+var configureLogger = exports.configureLogger = function configureLogger(app) {
+  logger.level = app.ladderjs.config.loggerLevel || logger.level;
   app.logger = logger;
+  // app.logger = console
 };
+
+exports.default = logger;

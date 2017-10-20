@@ -1,9 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
@@ -47,7 +43,7 @@ var authenticateUrl = function authenticateUrl(auth, appPolicies) {
     };
   }
   var policies = (0, _extends3.default)({}, defaultPolicies, appPolicies);
-
+  console.log(policies, appPolicies);
   return policies[auth];
 };
 var respond = function respond(res, data) {
@@ -266,7 +262,7 @@ var processCrud = function processCrud(type, _ref3, crudRoutes, Model) {
   }();
 };
 
-exports.default = function (app) {
+module.exports = function (app) {
   var routes = [].concat((0, _toConsumableArray3.default)(_routes2.default.filter(function (route) {
     return !app.disabledRoutes.includes(route.url);
   })), (0, _toConsumableArray3.default)(app.routesToAdd || []));
@@ -280,15 +276,11 @@ exports.default = function (app) {
             method = _crudRoutes$type.method;
 
         var model = require(app.modelsPath + '/' + config.model);
-        var Model = model.default ? model.default(app.db) : model(app.db);
-        app[method](app.ladderjs.getUrl(url), function (req, res, next) {
-          return authenticateUrl(config.auth, app.policies)(req, res, next, config);
-        }, processCrud(type, config, crudRoutes, Model));
+        var Model = model.default ? model.default(app.ladderjs.db) : model(app.ladderjs.db);
+        app[method](app.ladderjs.getUrl(url), authenticateUrl(config.auth, app.policies), processCrud(type, config, crudRoutes, Model));
       });
     } else {
-      app[config.method](app.ladderjs.getUrl(config.url, app), function (req, res, next) {
-        return authenticateUrl(config.auth, app.policies)(req, res, next, config);
-      }, processUrl(config, app));
+      app[config.method](app.ladderjs.getUrl(config.url, app), authenticateUrl(config.auth, app.policies), processUrl(config, app));
     }
   });
 

@@ -20,11 +20,4 @@ exports.default = [{
   url: '/lai',
   controller: 'LaiController',
   action: 'render'
-}, {
-  description: 'LAI - test route',
-  method: 'get',
-  url: '/lai/test',
-  controller: 'LaiController',
-  action: 'testAsync',
-  view: 'testAsync'
 }];

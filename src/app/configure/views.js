@@ -1,9 +1,9 @@
 import randomID from 'random-id'
 
-module.exports = (app, config) => {
+export default app => {
   app.set('view engine', 'pug')
   app.set('views', [
-    `${process.cwd()}${config.viewsPath}`,
+    `${process.cwd()}${app.ladderjs.config.viewsPath}`,
     __dirname + '/../../../views',
   ])
   app.locals.compileDebug = process.env.NODE_ENV !== 'production'
@@ -12,13 +12,19 @@ module.exports = (app, config) => {
   app.locals.errorElement = ''
   app.locals.ainclude = (
     route,
+    id,
     loadingElement = app.locals.loadingElement,
     errorElement = app.locals.errorElement
   ) => {
-    const id = randomID(10)
-    return `<div id="${id}">${loadingElement}</div>
+    let generate = false
+    if (!id) {
+      id = randomID(10)
+      generate = true
+    }
+    return `${generate ? `<div id="${id}"></div>` : ''}
       <script type="text/javascript">
         $(function(){
+          $('#${id}').html('${loadingElement}')
           $.post('/lai', {route: '${route}'})
             .done(function(data){
               $('#${id}').html(data)

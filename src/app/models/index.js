@@ -1,9 +1,9 @@
 import UserModel from './User.js'
 
-const connection = require('../sequelize.js')
+let user
 
-const user = UserModel(connection)
+export const configureModels = app => {
+  user = UserModel(app.db)
+}
 
 export const User = user
-
-export const Sequelize = connection

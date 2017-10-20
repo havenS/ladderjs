@@ -1,26 +1,37 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _keys = require('babel-runtime/core-js/object/keys');
 
 var _keys2 = _interopRequireDefault(_keys);
 
+var _express = require('express');
+
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _router = require('../router');
+
+var _router2 = _interopRequireDefault(_router);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var express = require('express');
-var bodyParser = require('body-parser');
+exports.default = function (app) {
+  var config = app.ladderjs.config;
 
-var addRoutes = require('../router');
-
-module.exports = function (app, config) {
-  app.use(bodyParser.json({
+  app.use(_bodyParser2.default.json({
     strict: false
   }));
-  app.use(bodyParser.urlencoded({
+  app.use(_bodyParser2.default.urlencoded({
     extended: true
   }));
 
-  app.use('/img', [express.static('' + process.cwd() + config.publicPath + '/img'), express.static(__dirname + '/../../../img')]);
-  app.use('/', [express.static('' + process.cwd() + config.publicPath), express.static(__dirname + '/../../..')]);
+  app.use('/', [(0, _express.static)('' + process.cwd() + config.publicPath), (0, _express.static)(__dirname + '/../../..')]);
+  app.use('/img', [(0, _express.static)('' + process.cwd() + config.publicPath + '/img'), (0, _express.static)(__dirname + '/../../../img')]);
 
   app.use(function (req, res, next) {
     req.ladderjs = app.ladderjs;
@@ -28,12 +39,15 @@ module.exports = function (app, config) {
   });
 
   app.use(function (req, res, next) {
-    res.locals.messages = {};
+    res.locals.messages = {
+      error: [],
+      success: []
+    };
     try {
       res.locals.messages.error = req.flash('error');
       res.locals.messages.success = req.flash('success');
     } catch (e) {
-      app.error(e);
+      app.logger.error(e);
     }
     res.locals.user = req.user;
     res.locals.currentUrl = req.originalUrl;
@@ -42,7 +56,7 @@ module.exports = function (app, config) {
     next();
   });
 
-  addRoutes(app);
+  (0, _router2.default)(app);
 
   app.use(function (req, res) {
     res.status(404).render('404');

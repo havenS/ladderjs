@@ -7,7 +7,7 @@ You'll find below a table summarizing the available config properties and their 
 
 | Property    | Type | Default | Notes |
 |-------------|------|---------|-------------|
-| Port      | STRING|INT   | 8080      |           |
+| port      | STRING|INT   | 8080      |           |
 | stylesProcessor      | STRING   | 'less'      | 'less' or 'sass'          |
 | loggerLevel      | STRING   | 'info'      | 'info', 'warning' or 'fatal'          |
 | debugRoutes      | BOOLEAN   | false      | Will log all the available routes on application start, usefully to debug          |
@@ -18,6 +18,7 @@ You'll find below a table summarizing the available config properties and their 
 | viewsPath      | STRING   | '/views'      | The path used to find the views Pug files          |
 | auth      | OBJECT   | null      | If you want to use an already existing user model, pass a Sequelize model, the name of the username field and the name of the password field          |
 | routes      | ARRAY[OBJECT]   | []      | An array of the routes you need to define. You'll find further information on the Routing documentation page          |
+| policies      | OBJECT[FUNCTION]   | []      | An object of policies used in routes          |
 | disabledRoutes      | ARRAY[STRING]   | []      | If you need to disable a default route provided by the framework, you can pass the url of the route in this array          |
 
 ## Operating modes

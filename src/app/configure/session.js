@@ -1,8 +1,8 @@
-const session = require('express-session')
-const flash = require('connect-flash')
-const cookieParser = require('cookie-parser')
+import session from 'express-session'
+import flash from 'connect-flash'
+import cookieParser from 'cookie-parser'
 
-module.exports = app => {
+export default app => {
   app.use(cookieParser())
 
   app.use(

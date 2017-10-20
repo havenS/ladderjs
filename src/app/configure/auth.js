@@ -1,9 +1,9 @@
+import passport from 'passport'
+import {Strategy as LocalStrategy} from 'passport-local'
+
 import {User} from '../models'
 
-var passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy
-
-module.exports = app => {
+export default app => {
   app.use(passport.initialize())
   app.use(passport.session())
 

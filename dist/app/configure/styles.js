@@ -1,33 +1,47 @@
 'use strict';
 
-var express = require('express');
-var expressLess = require('express-less');
-var sassMiddleware = require('node-sass-middleware');
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-module.exports = function (app, config) {
+var _express = require('express');
+
+var _expressLess = require('express-less');
+
+var _expressLess2 = _interopRequireDefault(_expressLess);
+
+var _nodeSassMiddleware = require('node-sass-middleware');
+
+var _nodeSassMiddleware2 = _interopRequireDefault(_nodeSassMiddleware);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (app) {
+  var config = app.ladderjs.config;
+
   if (config.stylesProcessor === 'sass') {
-    app.use(sassMiddleware({
+    app.use((0, _nodeSassMiddleware2.default)({
       src: '' + process.cwd() + config.stylesPath,
       dest: '' + process.cwd() + config.publicPath + '/styles',
       debug: false,
       outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'extended',
       prefix: '/styles'
     }));
-    app.use('/styles', express.static('' + process.cwd() + config.publicPath + '/styles'));
+    app.use('/styles', (0, _express.static)('' + process.cwd() + config.publicPath + '/styles'));
 
-    app.use(sassMiddleware({
+    app.use((0, _nodeSassMiddleware2.default)({
       src: __dirname + '/../../../styles/sass',
       dest: __dirname + '/styles/css',
       debug: false,
       outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'extended',
       prefix: '/styles'
     }));
-    app.use('/styles', express.static(__dirname + '/public/styles'));
+    app.use('/styles', (0, _express.static)(__dirname + '/public/styles'));
   } else {
-    app.use('/styles', [expressLess(__dirname + '/../../../styles/less', {
+    app.use('/styles', [(0, _expressLess2.default)(__dirname + '/../../../styles/less', {
       cache: process.env.NODE_ENV === 'production',
       compress: process.env.NODE_ENV === 'production'
-    }), expressLess('' + process.cwd() + config.stylesPath, {
+    }), (0, _expressLess2.default)('' + process.cwd() + config.stylesPath, {
       cache: process.env.NODE_ENV === 'production',
       compress: process.env.NODE_ENV === 'production'
     })]);

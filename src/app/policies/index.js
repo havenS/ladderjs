@@ -1,3 +1,1 @@
-import isAuthenticated from './isAuthenticated'
-
-export {isAuthenticated}
+export {default as isAuthenticated} from './isAuthenticated'

@@ -1,9 +1,10 @@
-const express = require('express')
-const bodyParser = require('body-parser')
+import {static as exstatic} from 'express'
+import bodyParser from 'body-parser'
 
-const addRoutes = require('../router')
+import addRoutes from '../router'
 
-module.exports = (app, config) => {
+export default app => {
+  const {config} = app.ladderjs
   app.use(
     bodyParser.json({
       strict: false,
@@ -15,13 +16,13 @@ module.exports = (app, config) => {
     })
   )
 
-  app.use('/img', [
-    express.static(`${process.cwd()}${config.publicPath}/img`),
-    express.static(__dirname + '/../../../img'),
-  ])
   app.use('/', [
-    express.static(`${process.cwd()}${config.publicPath}`),
-    express.static(__dirname + '/../../..'),
+    exstatic(`${process.cwd()}${config.publicPath}`),
+    exstatic(__dirname + '/../../..'),
+  ])
+  app.use('/img', [
+    exstatic(`${process.cwd()}${config.publicPath}/img`),
+    exstatic(__dirname + '/../../../img'),
   ])
 
   app.use((req, res, next) => {
@@ -30,12 +31,15 @@ module.exports = (app, config) => {
   })
 
   app.use((req, res, next) => {
-    res.locals.messages = {}
+    res.locals.messages = {
+      error: [],
+      success: [],
+    }
     try {
       res.locals.messages.error = req.flash('error')
       res.locals.messages.success = req.flash('success')
     } catch (e) {
-      app.error(e)
+      app.logger.error(e)
     }
     res.locals.user = req.user
     res.locals.currentUrl = req.originalUrl

@@ -1,8 +1,17 @@
-import * as policies from '../policies'
+import * as defaultPolicies from '../policies'
 import appRoutes from './routes'
 
-const authenticateUrl = auth =>
-  !auth ? (req, res, next) => next() : policies[auth]
+const authenticateUrl = (auth, appPolicies) => {
+  if (!auth) {
+    return (req, res, next) => next()
+  }
+  const policies = {
+    ...defaultPolicies,
+    ...appPolicies,
+  }
+
+  return policies[auth]
+}
 const respond = (res, data, error = null) => {
   res.setHeader('Content-Type', 'application/json')
   res.status(error ? 400 : 200)
@@ -139,32 +148,35 @@ const processCrud = (type, {model, url, view}, crudRoutes, Model) => async (
   }
 }
 
-module.exports = app => {
-  const routes = [...(app.routesToAdd || []), ...appRoutes]
+export default app => {
+  const routes = [
+    ...appRoutes.filter(route => !app.disabledRoutes.includes(route.url)),
+    ...(app.routesToAdd || []),
+  ]
 
-  routes
-    .filter(route => !app.disabledRoutes.includes(route.url))
-    .forEach(config => {
-      if (config.crud) {
-        const crudRoutes = getCrudRoutes(config.url)
-        Object.keys(crudRoutes).forEach(type => {
-          const {url, method} = crudRoutes[type]
-          const model = require(`${app.modelsPath}/${config.model}`)
-          const Model = model.default ? model.default(app.db) : model(app.db)
-          app[method](
-            app.ladderjs.getUrl(url),
-            authenticateUrl(config.auth),
-            processCrud(type, config, crudRoutes, Model)
-          )
-        })
-      } else {
-        app[config.method](
-          app.ladderjs.getUrl(config.url, app),
-          authenticateUrl(config.auth),
-          processUrl(config, app)
+  routes.forEach(config => {
+    if (config.crud) {
+      const crudRoutes = getCrudRoutes(config.url)
+      Object.keys(crudRoutes).forEach(type => {
+        const {url, method} = crudRoutes[type]
+        const model = require(`${app.modelsPath}/${config.model}`)
+        const Model = model.default ? model.default(app.db) : model(app.db)
+        app[method](
+          app.ladderjs.getUrl(url),
+          (req, res, next) =>
+            authenticateUrl(config.auth, app.policies)(req, res, next, config),
+          processCrud(type, config, crudRoutes, Model)
         )
-      }
-    })
+      })
+    } else {
+      app[config.method](
+        app.ladderjs.getUrl(config.url, app),
+        (req, res, next) =>
+          authenticateUrl(config.auth, app.policies)(req, res, next, config),
+        processUrl(config, app)
+      )
+    }
+  })
 
   return app
 }
