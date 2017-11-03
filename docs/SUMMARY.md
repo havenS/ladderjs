@@ -5,4 +5,5 @@
 * [Usage](usage.md)
 * [router](router.md)
 * [Configuration](configuration.md)
+* [Authentication](authentication.md)
 
