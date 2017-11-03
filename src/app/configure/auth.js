@@ -1,18 +1,18 @@
 import passport from 'passport'
 import {Strategy as LocalStrategy} from 'passport-local'
 
-import {User} from '../models'
-
 export default app => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  const AuthModel = app.auth && app.auth.model ? app.auth.model : User
-  const idField = app.auth && app.auth.id ? app.auth.id : 'id'
-  const usernameField =
-    app.auth && app.auth.username ? app.auth.username : 'email'
-  const passwordField =
-    app.auth && app.auth.password ? app.auth.password : 'password'
+  const {models, ladderjs} = app
+  const {config} = ladderjs
+  const {model, id, username, password} = config.auth
+
+  const AuthModel = models[model]
+  const idField = id
+  const usernameField = username
+  const passwordField = password
 
   passport.use(
     new LocalStrategy(

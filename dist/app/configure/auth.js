@@ -14,18 +14,26 @@ var _passport2 = _interopRequireDefault(_passport);
 
 var _passportLocal = require('passport-local');
 
-var _models = require('../models');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (app) {
   app.use(_passport2.default.initialize());
   app.use(_passport2.default.session());
 
-  var AuthModel = app.auth && app.auth.model ? app.auth.model : _models.User;
-  var idField = app.auth && app.auth.id ? app.auth.id : 'id';
-  var usernameField = app.auth && app.auth.username ? app.auth.username : 'email';
-  var passwordField = app.auth && app.auth.password ? app.auth.password : 'password';
+  var models = app.models,
+      ladderjs = app.ladderjs;
+  var config = ladderjs.config;
+  var _config$auth = config.auth,
+      model = _config$auth.model,
+      id = _config$auth.id,
+      username = _config$auth.username,
+      password = _config$auth.password;
+
+
+  var AuthModel = models[model];
+  var idField = id;
+  var usernameField = username;
+  var passwordField = password;
 
   _passport2.default.use(new _passportLocal.Strategy({
     usernameField: usernameField,

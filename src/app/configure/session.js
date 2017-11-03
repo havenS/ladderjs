@@ -7,7 +7,7 @@ export default app => {
 
   app.use(
     session({
-      secret: process.env.SESSION_TOKEN || '4564f6s4fdsfdfd',
+      secret: app.ladderjs.config.sessionToken,
       resave: true,
       saveUninitialized: true,
       store: new (require('session-file-store')(session))(),

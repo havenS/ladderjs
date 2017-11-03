@@ -7,11 +7,11 @@
   "engines": {
     "node": "7.7.2"
   },
-  "bin": "bin/ladder",
   "scripts": {
     "dev": "PORT=3000 nodemon --exec babel-node src -i tests",
     "start": "node dist",
-    "build": "babel src --out-dir dist",
+    "build":
+      "node copy_boilerplate_files.js && babel src --out-dir dist --copy-files",
     "lint": "eslint src",
     "test": "nightwatch"
   },
@@ -49,6 +49,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.8.0",
     "eslint-plugin-babel": "^4.1.2",
+    "ncp": "^2.0.0",
     "nodemon": "^1.11.0"
   }
 }

@@ -3,20 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Sequelize = exports.db = exports.logger = undefined;
+exports.app = undefined;
 
-var _assign = require('babel-runtime/core-js/object/assign');
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _assign2 = _interopRequireDefault(_assign);
-
-var _sequelize = require('sequelize');
-
-Object.defineProperty(exports, 'Sequelize', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_sequelize).default;
-  }
-});
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _dotenv = require('dotenv');
 
@@ -26,11 +17,13 @@ var _logger = require('./app/configure/logger');
 
 var _logger2 = _interopRequireDefault(_logger);
 
-var _db = require('./app/configure/db');
+var _database = require('./app/configure/database');
 
-var _db2 = _interopRequireDefault(_db);
+var _database2 = _interopRequireDefault(_database);
 
 var _models = require('./app/models');
+
+var _models2 = _interopRequireDefault(_models);
 
 var _variables = require('./app/configure/variables');
 
@@ -56,56 +49,74 @@ var _auth = require('./app/configure/auth');
 
 var _auth2 = _interopRequireDefault(_auth);
 
+var _router = require('./app/router');
+
+var _router2 = _interopRequireDefault(_router);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require('express');
 
-_dotenv2.default.config();
+_dotenv2.default.config({ path: process.cwd() + '/.env' });
 
-var app = {};
+var defaultOptions = {
+  apiPrefix: process.env.API_PREFIX || '',
+  routes: [],
+  disabledRoutes: [],
+  dbUrl: process.env.DATABASE_URL || '',
+  dbLogging: process.env.DATABASE_LOGGING || false,
+  sequelizeOperatorsAliases: false,
+  loggerLevel: 'info',
+  auth: {
+    model: 'users',
+    id: 'id',
+    username: 'email',
+    password: 'password'
+  },
+  debugRoutes: false,
+  port: process.env.PORT || 3000,
+  controllersPath: '/controllers',
+  modelsPath: '/models',
+  publicPath: '/public',
+  viewsPath: '/views',
+  stylesPath: '/public/styles',
+  stylesProcessor: 'less',
+  sessionToken: process.env.SESSION_TOKEN || '4564f6s4fdsfdfd'
+};
+var ladder = {};
+
 var ladderjs = function ladderjs(conf) {
-  app = express();
-  var config = (0, _assign2.default)({}, {
-    dbUrl: process.env.DATABASE_URL || '',
-    dbLogging: process.env.DB_LOGGING || false,
-    apiPrefix: null,
-    auth: null, // model, username field, password field, default login redirect url
-    debugRoutes: false,
-    controllersPath: '/controllers',
-    loggerLevel: 'info',
-    modelsPath: '/models',
-    port: null,
-    publicPath: '/public',
-    routes: [],
-    stylesPath: '/public/styles',
-    stylesProcessor: 'less',
-    viewsPath: '/views',
-    disabledRoutes: []
-  }, conf);
+  ladder = express();
+  var config = (0, _extends3.default)({}, defaultOptions, {
+    conf: conf
+  });
 
-  (0, _variables2.default)(app, config);
-  (0, _logger.configureLogger)(app);
+  (0, _variables2.default)(ladder, config);
+  (0, _logger2.default)(ladder);
 
-  (0, _db.configureDb)(app);
-  (0, _models.configureModels)(app);
+  (0, _session2.default)(ladder);
+  if (config.dbUrl !== '') {
+    (0, _database2.default)(ladder);
+    (0, _models2.default)(ladder);
+    (0, _auth2.default)(ladder);
+  }
 
-  (0, _session2.default)(app);
-  (0, _auth2.default)(app);
-  (0, _styles2.default)(app);
-  (0, _request2.default)(app);
-  (0, _views2.default)(app);
+  (0, _styles2.default)(ladder);
+  (0, _router2.default)(ladder);
+  (0, _request2.default)(ladder);
+  (0, _views2.default)(ladder);
 
-  app.start = function () {
-    var port = config.port || process.env.PORT;
+  ladder.start = function () {
+    var port = config.port;
     this.listen(port);
     this.logger.info('LadderJS server started on port ' + port);
   };
 
-  return app;
+  return ladder;
 };
 
 exports.default = ladderjs;
+var app = exports.app = ladder;
 
 module.exports = ladderjs;
-var logger = exports.logger = _logger2.default;
-var db = exports.db = _db2.default;
+module.exports.app = ladder;

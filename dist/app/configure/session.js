@@ -22,7 +22,7 @@ exports.default = function (app) {
   app.use((0, _cookieParser2.default)());
 
   app.use((0, _expressSession2.default)({
-    secret: process.env.SESSION_TOKEN || '4564f6s4fdsfdfd',
+    secret: app.ladderjs.config.sessionToken,
     resave: true,
     saveUninitialized: true,
     store: new (require('session-file-store')(_expressSession2.default))()
