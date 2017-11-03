@@ -1,6 +1,8 @@
 # Summary
 
 * [Introduction](README.md)
-* [Getting Started](getting-started.md)
+* [Installation](getting-started.md)
+* [Usage](usage.md)
 * [router](router.md)
+* [Configuration](configuration.md)
 
