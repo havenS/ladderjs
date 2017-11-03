@@ -17,8 +17,6 @@
 | loadingElement | false | '' | An element to display while the call is processing. The element can also be defined globally \(see below\). |
 | errorElement | false | '' | An element to display if the call failed. The element can also be defined globally \(see below\). |
 
-
-
 ```
 // JS part
 app.locals.loadingElement = '<img src="/img/loader.svg" />'
