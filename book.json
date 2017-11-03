@@ -1,7 +1,5 @@
 {
 "gitbook": ">=3.2.3",
-"structure": {
-    "readme": "./documentation/README.md"
-},
+"structure.readme": "./documentation/README.md"
 "title": "documentation"
 }
