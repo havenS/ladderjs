@@ -11,5 +11,3 @@
 * [Authentication](authentication.md)
 * [Flash system](flash-system.md)
 
-## Command Line Interface
-
