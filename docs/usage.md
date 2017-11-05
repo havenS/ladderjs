@@ -1,6 +1,6 @@
 # Usage {#usage}
 
-## Configure database {#configure-database}
+## Configure database \(optional\) {#configure-database}
 
 To use **LadderJS **you need a Postgre SQL database.
 
@@ -26,14 +26,13 @@ DATABASE_LOGGING=true
 
 To start using **LadderJS **simply create an`index.js`file containing the following:
 
-```
+```js
 const ladderjs = require('ladderjs')
-
 
 const options = {}
 
-
 const app = ladderjs(options)
+
 app.start()
 ```
 
