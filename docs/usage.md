@@ -46,7 +46,7 @@ You'll then have have a basic website, configured using all the default settings
 
 ## NB {#nb}
 
-If you use Nodemon or any other file monitor, be sure tu exclude the`sessions`folder and the`*.log`files:
+If you use Nodemon or any other file monitor, be sure tu exclude the `sessions` folder and the `*.log` files:
 
 ```
 $ nodemon . -i sessions -i *.log
