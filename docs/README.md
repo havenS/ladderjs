@@ -1,4 +1,4 @@
-<span align="center" style="display:block;text-align:center">
+<p align="center" style="display:block;text-align:center">
 
 <img src="https://github.com/havenS/ladderjs/raw/master/assets/cloud.png"/>
 
@@ -7,7 +7,7 @@ LadderJS
 <a href="https://api.codacy.com/project/badge/Grade/ed3aa4d4c05243e0977af37fca4a8584">
   <img src="https://www.codacy.com/app/havenS/ladderjs?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=havenS/ladderjs&amp;utm_campaign=Badge_Grade" />
   </a>
-</span>
+</p>
 
 Welcome to **LadderJS**, a Node JS MVC framework inspired by Symfony, Yii or Ruby On Rails.
 
