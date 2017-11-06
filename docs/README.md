@@ -1,4 +1,4 @@
-<span style="display:block;text-align:center">
+<span align="center" style="display:block;text-align:center">
 
 ![](/assets/cloud.png)
 
@@ -35,5 +35,7 @@ Or use the LadderJS-CLI
 
 
 
-&lt;div&gt;Icons made by &lt;a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market"&gt;Vectors Market&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="\_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
+<div>
+  Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="\_blank">CC 3.0 BY&lt;/a>
+  </div>
 
