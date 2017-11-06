@@ -1,4 +1,4 @@
-<p align="center">
+<p style="text-align: text-center">
 
 ![](/assets/cloud.png)
 
