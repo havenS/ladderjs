@@ -1,11 +1,12 @@
-<p align="center" style="text-align: center">
-
-<img src="https://github.com/havenS/ladderjs/raw/master/assets/cloud.png"/>
-
-LadderJS 
-
-<a href="https://www.codacy.com/app/havenS/ladderjs?utm_source=github.com&utm_medium=referral&utm_content=havenS/ladderjs&utm_campaign=Badge_Grade">
-  <img src="https://api.codacy.com/project/badge/Grade/ed3aa4d4c05243e0977af37fca4a8584" />
+<p align="center">
+  <img src="https://github.com/havenS/ladderjs/raw/master/assets/cloud.png" />
+</p>
+<p align="center">
+  # LadderJS 
+</p>
+<p align="center">
+  <a href="https://www.codacy.com/app/havenS/ladderjs?utm_source=github.com&utm_medium=referral&utm_content=havenS/ladderjs&utm_campaign=Badge_Grade">
+    <img src="https://api.codacy.com/project/badge/Grade/ed3aa4d4c05243e0977af37fca4a8584" />
   </a>
 </p>
 
