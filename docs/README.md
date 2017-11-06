@@ -1,4 +1,4 @@
-<p align="center" style="display:block;text-align:center">
+<p align="center" style="text-align: center">
 
 <img src="https://github.com/havenS/ladderjs/raw/master/assets/cloud.png"/>
 
