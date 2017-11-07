@@ -11,7 +11,7 @@
 </p>
 <hr/>
 <p>
-  Welcome to <strong>LadderJS</strong>, a Node JS MVC framework inspired by Symfony, Yii or Ruby On Rails.
+  Welcome to <strong>LadderJS</strong>, a Node JS fullstack MVC framework inspired by Symfony, Yii or Ruby On Rails.
 </p>
 
 <p>
