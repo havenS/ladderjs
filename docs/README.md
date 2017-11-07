@@ -13,6 +13,7 @@
 <span>
   Welcome to <strong>LadderJS</strong>, a Node JS MVC framework inspired by Symfony, Yii or Ruby On Rails.
 </span>
+<br/>
 <span>
   By using <strong>LadderJS</strong>, you'll benefit from the included:
   <ul>
