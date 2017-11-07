@@ -17,7 +17,7 @@
 | loadingElement | false | '' | An element to display while the call is processing. The element can also be defined globally \(see below\). |
 | errorElement | false | '' | An element to display if the call failed. The element can also be defined globally \(see below\). |
 
-```
+```js
 // JS part
 app.locals.loadingElement = '<img src="/img/loader.svg" />'
 app.locals.errorElement = '<img src="/img/error.svg" />'
@@ -25,7 +25,7 @@ app.locals.errorElement = '<img src="/img/error.svg" />'
 
 And then use it in your template:
 
-```
+```jade
 div!=ainclude('/mycontroller/my-async-data')
 ```
 
@@ -33,13 +33,13 @@ This call will generate a div with a random `id`.
 
 Or this way, which also generate a random `id`.
 
-```
+```jade
 div!=ainclude('/mycontroller/my-async-data', null, '<img src="/img/loader.svg" />', '<img src="/img/error.svg" />')
 ```
 
 ### Async route configuration {#async-route-configuration}
 
-```
+```JSON
 {
   description: 'Heavy data fetching',
   method: 'get',

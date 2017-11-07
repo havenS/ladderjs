@@ -2,7 +2,7 @@
 
 ## Installation
 
-```
+```bash
 $ npm install -g ladderjs-cli
 ```
 
@@ -10,7 +10,7 @@ $ npm install -g ladderjs-cli
 
 ### Help
 
-```
+```bash
 $ ladderjs-cli -h
 ```
 
@@ -18,7 +18,7 @@ Will display a list of available options
 
 ### Create a new LadderJS app
 
-```
+```bash
 $ ladderjs-cli -c
 ```
 

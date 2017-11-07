@@ -1,8 +1,8 @@
 # Authentication {#authentication}
 
-auth config object 
+auth config object
 
-```
+```JSON
 { 
     model
     email field
@@ -12,14 +12,14 @@ auth config object
 
 redirect on login
 
-```
-<input name="returnTo" value="/" />
+```jade
+input(name="returnTo", value="/")
 ```
 
-redirect on logout, use the `returnTo` query param: 
+redirect on logout, use the `returnTo` query param:
 
-```
-<a href="/logout?returnTo=/">Logout</a>
+```jade
+a(href="/logout?returnTo=/") Logout
 ```
 
 
