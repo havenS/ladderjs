@@ -1,9 +1,9 @@
 <style>
   #logo {
-  
+    text-align: center;
   }
 </style>
-<p align="center">
+<p id="logo" align="center">
   <img src="https://github.com/havenS/ladderjs/raw/master/assets/cloud.png" />
 </p>
 
