@@ -34,7 +34,7 @@ By using **LadderJS**, you'll benefit from the included:
 
 A demo app can be used as a boilerplate if you want to skip the first steps of the documentation.
 
-Or use the LadderJS-CLI
+Or use the [LadderJS-CLI](https://havens.gitbooks.io/ladderjs/content/command-line-interface.html) to be assisted on each step of the configuration of your projet. 
 
 <hr/>
 <div>
