@@ -10,11 +10,11 @@
   </a>
 </p>
 <hr/>
-<span>
+<p>
   Welcome to <strong>LadderJS</strong>, a Node JS MVC framework inspired by Symfony, Yii or Ruby On Rails.
-</span>
-<br/>
-<span>
+</p>
+
+<p>
   By using <strong>LadderJS</strong>, you'll benefit from the included:
   <ul>
     <li>
@@ -40,7 +40,7 @@
     </li>
   </ul>
   A demo app can be used as a boilerplate if you want to skip the first steps of the documentation. Or use the <a href="https://havens.gitbooks.io/ladderjs/content/command-line-interface.html">LadderJS-CLI</a> to be assisted on each step of the configuration of your projet.
-</span>
+</p>
 
 <hr/>
 <div>
