@@ -2,9 +2,9 @@
 
 ## Configure database \(optional\) {#configure-database}
 
-To use **LadderJS **you need a Postgre SQL database.
+To use **LadderJS **with an authentication and a private area, you need a PostgreSQL database.
 
-First, create a Postgre SQL database:
+First, create a PostgreSQL database:
 
 ```
 $ createdb <DATABASE_NAME>
