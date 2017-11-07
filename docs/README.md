@@ -5,11 +5,10 @@
     text-align: center;
   }
 </style>
-<p align="center">
   <p id="logo" align="center">
     <img src="https://github.com/havenS/ladderjs/raw/master/assets/cloud.png" />
   </p>
-  <h1 align="center">
+  <h1 align="center" style="text-align: center">
     LadderJS
   </h1>
   <p align="center">
@@ -17,7 +16,7 @@
       <img src="https://api.codacy.com/project/badge/Grade/ed3aa4d4c05243e0977af37fca4a8584" />
     </a>
   </p>
-</p>
+
 <hr/>
 
 <span>
