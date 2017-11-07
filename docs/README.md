@@ -1,31 +1,21 @@
-<style>
-  p {
-    background-color: red;
-    display: block;
-    text-align: center;
-  }
-</style>
-  <p id="logo" align="center">
-    <img src="https://github.com/havenS/ladderjs/raw/master/assets/cloud.png" />
-  </p>
-  <h1 align="center" style="text-align: center">
-    LadderJS
-  </h1>
-  <p align="center">
-    <a href="https://www.codacy.com/app/havenS/ladderjs?utm_source=github.com&utm_medium=referral&utm_content=havenS/ladderjs&utm_campaign=Badge_Grade">
-      <img src="https://api.codacy.com/project/badge/Grade/ed3aa4d4c05243e0977af37fca4a8584" />
-    </a>
-  </p>
-
+<p id="logo" align="center">
+  <img src="https://github.com/havenS/ladderjs/raw/master/assets/cloud.png" />
+</p>
+<h1 align="center" style="text-align: center">
+  LadderJS
+</h1>
+<p align="center">
+  <a href="https://www.codacy.com/app/havenS/ladderjs?utm_source=github.com&utm_medium=referral&utm_content=havenS/ladderjs&utm_campaign=Badge_Grade">
+    <img src="https://api.codacy.com/project/badge/Grade/ed3aa4d4c05243e0977af37fca4a8584" />
+  </a>
+</p>
 <hr/>
-
 <span>
   Welcome to
   <strong>LadderJS</strong>, a Node JS MVC framework inspired by Symfony, Yii or Ruby On Rails.
 </span>
 <span>
-  By using
-  <strong>LadderJS</strong>, you'll benefit from the included:
+  By using <strong>LadderJS</strong>, you'll benefit from the included:
   <ul>
     <li>
       Router: using Express 4
@@ -49,8 +39,7 @@
       CRUD scaffolding
     </li>
   </ul>
-  A demo app can be used as a boilerplate if you want to skip the first steps of the documentation. Or use the [LadderJS-CLI](https://havens.gitbooks.io/ladderjs/content/command-line-interface.html)
-  to be assisted on each step of the configuration of your projet.
+  A demo app can be used as a boilerplate if you want to skip the first steps of the documentation. Or use the <a href="https://havens.gitbooks.io/ladderjs/content/command-line-interface.html">LadderJS-CLI</a> to be assisted on each step of the configuration of your projet.
 </span>
 
 <hr/>
