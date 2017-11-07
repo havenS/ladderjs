@@ -1,3 +1,8 @@
+<style>
+  #logo {
+  
+  }
+</style>
 <p align="center">
   <img src="https://github.com/havenS/ladderjs/raw/master/assets/cloud.png" />
 </p>
