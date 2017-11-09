@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-$ npm install -g ladderjs-cli
+$ npm install -g ladderjs
 ```
 
 ## Usage
@@ -11,7 +11,7 @@ $ npm install -g ladderjs-cli
 ### Help
 
 ```bash
-$ ladderjs-cli -h
+$ ladderjs -h
 ```
 
 Will display a list of available options
@@ -19,7 +19,7 @@ Will display a list of available options
 ### Create a new LadderJS app
 
 ```bash
-$ ladderjs-cli -c
+$ ladderjs -c
 ```
 
 Will create a new LadderJS app based on your answers to a series of questions. You'll have a database ready and all the files required to start to configure and run your app.
