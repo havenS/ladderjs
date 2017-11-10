@@ -1,3 +1,4 @@
+/* global __OPTIONS__ */
 import ladderjs from 'ladderjs'
 import routes from './routes'
 

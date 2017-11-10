@@ -23,7 +23,7 @@ var saveToEnvFile = function(dest, config) {
     string += key + '=' + config[key] + '\n'
     return string
   }, '')
-  fs.writeFileSync(dest + '/.env', configEnv, { encoding: 'utf8', flag: 'w' })
+  fs.writeFileSync(dest + '/.env', configEnv, {encoding: 'utf8', flag: 'w'})
 }
 
 var saveToConfigObject = function(dest, config) {
