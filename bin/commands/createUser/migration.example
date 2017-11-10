@@ -1,0 +1,12 @@
+module.exports = {
+  up(queryInterface) {
+    return queryInterface.sequelize.query(
+      'INSERT INTO users(email, password_digest, role) VALUES (\'__EMAIL__\', \'__PASSWORD__\', \'__ROLE__\');'
+    )
+  },
+  down(queryInterface) {
+    return queryInterface.sequelize.query(
+      'DELETE FROM `users` WHERE email = \'__EMAIL__\';'
+    )
+  },
+}

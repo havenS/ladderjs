@@ -40,6 +40,28 @@ const defaultOptions = {
 }
 let ladder = {}
 
+/**
+ * TODO
+ * - les controllers locaux ne sont pas utilisés
+ * - réorganiser les routes pour permettre l'override des crud
+ *  [
+ *    config.routes,
+ *    ...defaultRoutes
+ *  ]
+ *  ou
+ *  [
+ *    defaultRoutes.global,
+ *    defaultRoutes.auth,
+ *    config.routes,
+ *    defaultRoutes.crud
+ *  }]
+ *  ou
+ *  {
+ *    ...defaultRoutes,
+ *    config.routes
+ *  } pour utiliser un id de route '<METHOD>_<URL>'
+ */
+
 const ladderjs = conf => {
   ladder = express()
   const config = {

@@ -1,0 +1,24 @@
+extends ../layouts/main
+
+block append content
+  .container
+    .row
+      .col.s12
+        h1= 'Create new ' + modelName
+    .row
+      form(method='POST', action=createUrl)
+        .col.s12 
+          each field in fields
+            if !field.auto
+              .row
+                .input-field.col.s12 
+                  case field.type
+                    when 'STRING'
+                      input(id=field.name, name=field.name, type='text')
+                      label(for=field.name)= field.name
+                    when 'TEXT'
+                      textarea(id=field.name, name=field.name, type='text')
+                      label(for=field.name)= field.name
+          .row
+            .input-field.col.s12
+            button.waves-effect.waves-light.btn(type='submit') Save
