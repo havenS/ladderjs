@@ -67,12 +67,12 @@ export const signup = (req, res) => {
     .catch(function(error) {
       let message
       switch (error.name) {
-      case 'SequelizeUniqueConstraintError':
-        message = 'An account using this email address already exists'
-        break
-      default:
-        message = error.message
-        break
+        case 'SequelizeUniqueConstraintError':
+          message = 'An account using this email address already exists'
+          break
+        default:
+          message = error.message
+          break
       }
       req.flash('error', message)
       res.redirect(req.ladderjs.getUrl('/create-account'))
