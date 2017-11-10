@@ -3,8 +3,12 @@ import ladderjs from 'ladderjs'
 import routes from './routes'
 
 const options = __OPTIONS__
-options.routes = routes
 
-const app = ladderjs(options)
+const app = ladderjs({
+  ...options,
+  routes: routes,
+  controllersPath: `${__dirname}/controllers`,
+  modelsPath: `${__dirname}/models`,
+})
 
 app.start()

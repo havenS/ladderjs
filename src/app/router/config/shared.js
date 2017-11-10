@@ -5,7 +5,7 @@ export const getRoutes = app => [
   ...appRoutes.filter(
     route => !app.ladderjs.config.disabledRoutes.includes(route.url)
   ),
-  ...(app.routesToAdd || []),
+  ...(app.ladderjs.config.routes || []),
 ]
 
 export const authenticateUrl = (auth, appPolicies) => {

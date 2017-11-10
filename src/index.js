@@ -66,7 +66,7 @@ const ladderjs = conf => {
   ladder = express()
   const config = {
     ...defaultOptions,
-    conf,
+    ...conf,
   }
 
   configureVariables(ladder, config)

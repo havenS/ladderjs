@@ -6,6 +6,6 @@ export default (app, config) => {
     getUrl: url => (apiPrefix ? `${apiPrefix}${url}` : url),
     config: config,
   }
-  app.controllersPath = `${process.cwd()}${controllersPath}`
-  app.modelsPath = `${process.cwd()}${modelsPath}`
+  app.controllersPath = controllersPath
+  app.modelsPath = modelsPath
 }
