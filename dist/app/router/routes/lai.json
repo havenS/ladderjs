@@ -1,0 +1,9 @@
+[
+  {
+    "description": "LAI - Ladder Dynamic Include",
+    "method": "post",
+    "url": "/lai",
+    "controller": "LaiController",
+    "action": "render"
+  }
+]
