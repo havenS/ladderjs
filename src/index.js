@@ -92,11 +92,8 @@ const ladderjs = conf => {
     this.logger.info('LadderJS server started on port ' + port)
   }
 
+  module.exports.app = ladder
   return ladder
 }
 
-export default ladderjs
-export const app = ladder
-
 module.exports = ladderjs
-module.exports.app = ladder
