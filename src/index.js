@@ -9,6 +9,7 @@ import configureViews from './app/configure/views'
 import configureStyles from './app/configure/styles'
 import configureSession from './app/configure/session'
 import configureRequest from './app/configure/request'
+import configureErrors from './app/configure/errors'
 import configureAuth from './app/configure/auth'
 import configureRoutes from './app/router'
 
@@ -80,8 +81,9 @@ const ladderjs = conf => {
   }
 
   configureStyles(ladder)
-  configureRoutes(ladder)
   configureRequest(ladder)
+  configureRoutes(ladder)
+  configureErrors(ladder)
   configureViews(ladder)
 
   ladder.start = function() {

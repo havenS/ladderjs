@@ -1,9 +1,10 @@
 import {static as exstatic} from 'express'
 
 export default (app, config) => {
-  app.use('/', [
-    exstatic(`${process.cwd()}${config.publicPath}`),
-    exstatic(__dirname + '/../../..'),
+  app.use('/', exstatic(`${process.cwd()}${config.publicPath}`))
+  app.use('/styles', [
+    exstatic(`${process.cwd()}${config.publicPath}/styles`),
+    exstatic(__dirname + '/../../../styles'),
   ])
   app.use('/img', [
     exstatic(`${process.cwd()}${config.publicPath}/img`),
