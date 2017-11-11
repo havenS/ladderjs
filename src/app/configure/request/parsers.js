@@ -5,6 +5,6 @@ export default [
     strict: false,
   }),
   bodyParser.urlencoded({
-    extended: true,
+    extended: false,
   }),
 ]

@@ -1,6 +1,6 @@
-/* global __OPTIONS__ */
 import ladderjs from 'ladderjs'
 import routes from './routes'
+import registerModels from './models'
 
 const options = __OPTIONS__
 
@@ -10,5 +10,7 @@ const app = ladderjs({
   controllersPath: `${__dirname}/controllers`,
   modelsPath: `${__dirname}/models`,
 })
+
+registerModels(app)
 
 app.start()
