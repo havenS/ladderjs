@@ -31,10 +31,15 @@ export const respond = (res, data, error = null) => {
   )
 }
 
-export const getView = (view, url, crudType) => {
+export const getView = (view, url, prefix, crudType) => {
+  const prefixToUse = prefix ? `${prefix}/` : ''
   if (view) {
-    return crudType ? `${view}/${crudType}` : view
+    return crudType
+      ? `${prefixToUse}${view}/${crudType}`
+      : `${prefixToUse}${view}`
   }
 
-  return crudType ? `crud/${crudType}` : url.replace('/', '')
+  return crudType
+    ? `${prefixToUse}crud/${crudType}`
+    : `${prefixToUse}${url.replace('/', '')}`
 }

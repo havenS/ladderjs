@@ -1,6 +1,6 @@
 import {getView, authenticateUrl, respond} from './shared'
 
-const processUrl = ({action, controller, url, view}, app) => async (
+const processUrl = ({action, controller, url, view, prefix}, app) => async (
   req,
   res,
   next
@@ -8,7 +8,7 @@ const processUrl = ({action, controller, url, view}, app) => async (
   if (req.error) {
     return respond(res, null, req.error)
   }
-  const viewPath = getView(view, url)
+  const viewPath = getView(view, url, prefix)
 
   if (!controller) {
     return res.render(viewPath)
@@ -19,7 +19,7 @@ const processUrl = ({action, controller, url, view}, app) => async (
     controllerToUse = require(`${app.controllersPath}/${controller}`)
   } catch (err) {
     try {
-      controllerToUse = require(`../controllers/${controller}`)
+      controllerToUse = require(`../../controllers/${controller}`)
     } catch (e) {
       app.logger.error(err)
       return res.status(500).render('500', {error: String(err)})
@@ -40,9 +40,15 @@ const processUrl = ({action, controller, url, view}, app) => async (
 
 export const processRoute = (app, config) => {
   app[config.method](
-    app.ladderjs.getUrl(config.url, app),
-    (req, res, next) =>
-      authenticateUrl(config.auth, app.policies)(req, res, next, config),
+    app.generateUrl(config, app),
+    (req, res, next) => {
+      authenticateUrl(config.auth, app.ladderjs.config.policies)(
+        req,
+        res,
+        next,
+        config
+      )
+    },
     processUrl(config, app)
   )
 }

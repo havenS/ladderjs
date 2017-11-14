@@ -7,6 +7,7 @@ import configureModels from './app/models'
 import configureVariables from './app/configure/variables'
 import configureViews from './app/configure/views'
 import configureStyles from './app/configure/styles'
+import configureParsers from './app/configure/parsers'
 import configureSession from './app/configure/session'
 import configureRequest from './app/configure/request'
 import configureErrors from './app/configure/errors'
@@ -68,12 +69,17 @@ const ladderjs = conf => {
   const config = {
     ...defaultOptions,
     ...conf,
+    auth: {
+      ...defaultOptions.auth,
+      ...conf.auth,
+    },
   }
 
   configureVariables(ladder, config)
   configureLogger(ladder)
 
   configureSession(ladder)
+  configureParsers(ladder)
   if (config.dbUrl !== '') {
     configureDb(ladder)
     configureModels(ladder)

@@ -1,1 +1,1 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.default=function(app){return function(req,res,next){req.ladderjs=app.ladderjs;next()}};
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});var _extends2=require("babel-runtime/helpers/extends");var _extends3=_interopRequireDefault(_extends2);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{"default":obj}}exports.default=function(app){return function(req,res,next){req.ladderjs=(0,_extends3.default)({},app.ladderjs,{generateUrl:app.generateUrl});next()}};

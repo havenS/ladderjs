@@ -1,3 +1,4 @@
+import {app} from '../../../index'
 import {getView, authenticateUrl} from './shared'
 
 const getCrudRoutes = url => {
@@ -57,12 +58,14 @@ const getCrudFields = Model => {
   }
 }
 
-const processCrud = (type, {model, url, view}, crudRoutes, Model) => async (
-  req,
-  res
-) => {
+const processCrud = (
+  type,
+  {model, url, prefix, view},
+  crudRoutes,
+  Model
+) => async (req, res) => {
   const action = require('../controllers/CrudController')[`${type}Entity`]
-  const viewPath = getView(view, url, type)
+  const viewPath = getView(view, url, prefix, type)
   let data = await action(req, res, Model)
 
   if (data) {
@@ -75,7 +78,7 @@ const processCrud = (type, {model, url, view}, crudRoutes, Model) => async (
     }
     return res.render(viewPath, data)
   } else {
-    return res.redirect(req.ladderjs.getUrl(crudRoutes.index.url, req.ladderjs))
+    return res.redirect(app.generateUrl(crudRoutes.index.url, req.ladderjs))
   }
 }
 
@@ -86,7 +89,7 @@ export const processCrudRoute = (app, config) => {
     const model = require(`${app.modelsPath}/${config.model}`)
     const Model = model.default ? model.default(app.db) : model(app.db)
     app[method](
-      app.ladderjs.getUrl(url),
+      app.generateUrl(url),
       (req, res, next) =>
         authenticateUrl(config.auth, app.policies)(req, res, next, config),
       processCrud(type, config, crudRoutes, Model)

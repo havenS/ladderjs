@@ -1,5 +1,4 @@
-import passport from 'passport'
-import {User} from '../models'
+import {app} from 'ladderjs'
 
 export const login = (req, res, next) => {
   const returnToField = req.body.returnTo
@@ -7,27 +6,26 @@ export const login = (req, res, next) => {
   const returnTo = returnToSession || returnToField || '/'
 
   delete req.session.returnTo
-
-  passport.authenticate('local', function(err, user) {
+  app.login((err, user) => {
     if (err) {
       req.flash('error', 'An error occured, please try again')
-      res.redirect(req.ladderjs.getUrl('/login'))
+      res.redirect(app.generateUrl('/login'))
       return
     }
 
     if (!user) {
       req.flash('error', 'Invalid email or password')
-      res.redirect(req.ladderjs.getUrl('/login'))
+      res.redirect(app.generateUrl('/login'))
       return
     }
-    req.logIn(user, function(err) {
+    req.logIn(user, err => {
       if (err) {
         req.flash('error', 'Invalid email or password')
         next(err)
         return
       }
 
-      res.redirect(req.ladderjs.getUrl(returnTo))
+      res.redirect(app.generateUrl(returnTo))
       return
     })
   })(req, res, next)
@@ -36,7 +34,7 @@ export const login = (req, res, next) => {
 export const logout = (req, res) => {
   req.logout()
   const returnTo = req.params.returnTo || '/login'
-  res.redirect(req.ladderjs.getUrl(returnTo))
+  res.redirect(app.generateUrl(returnTo))
 }
 
 export const signup = (req, res) => {
@@ -46,7 +44,7 @@ export const signup = (req, res) => {
 
   if (!email || !password || !password_confirmation) {
     req.flash('error', 'All fields are required')
-    return res.redirect(req.ladderjs.getUrl('/create-account'))
+    return res.redirect(app.generateUrl('/create-account'))
   }
 
   var newUser = {
@@ -55,16 +53,16 @@ export const signup = (req, res) => {
     password_confirmation,
   }
 
-  User.create(newUser)
-    .then(function() {
-      res.redirect(req.ladderjs.getUrl('/login'))
-      passport.authenticate('local', {
-        successRedirect: req.ladderjs.getUrl('/manager'),
+  app.AuthModel.create(newUser)
+    .then(() => {
+      // res.redirect(app.generateUrl('/login'))
+      app.login({
+        successRedirect: app.generateUrl('/manager'),
       })({
         body: {email, password},
       })
     })
-    .catch(function(error) {
+    .catch(error => {
       let message
       switch (error.name) {
         case 'SequelizeUniqueConstraintError':
@@ -75,6 +73,6 @@ export const signup = (req, res) => {
           break
       }
       req.flash('error', message)
-      res.redirect(req.ladderjs.getUrl('/create-account'))
+      res.redirect(app.generateUrl('/create-account'))
     })
 }

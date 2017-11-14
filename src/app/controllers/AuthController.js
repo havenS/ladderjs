@@ -1,3 +1,4 @@
+import {app} from '../../index'
 import passport from 'passport'
 import {User} from '../models'
 
@@ -7,17 +8,16 @@ export const login = (req, res, next) => {
   const returnTo = returnToSession || returnToField || '/'
 
   delete req.session.returnTo
-
-  passport.authenticate('local', function(err, user) {
+  app.login(function(err, user) {
     if (err) {
       req.flash('error', 'An error occured, please try again')
-      res.redirect(req.ladderjs.getUrl('/login'))
+      res.redirect(app.generateUrl('/login'))
       return
     }
 
     if (!user) {
       req.flash('error', 'Invalid email or password')
-      res.redirect(req.ladderjs.getUrl('/login'))
+      res.redirect(app.generateUrl('/login'))
       return
     }
     req.logIn(user, function(err) {
@@ -27,7 +27,7 @@ export const login = (req, res, next) => {
         return
       }
 
-      res.redirect(req.ladderjs.getUrl(returnTo))
+      res.redirect(app.generateUrl(returnTo))
       return
     })
   })(req, res, next)
@@ -36,7 +36,7 @@ export const login = (req, res, next) => {
 export const logout = (req, res) => {
   req.logout()
   const returnTo = req.params.returnTo || '/login'
-  res.redirect(req.ladderjs.getUrl(returnTo))
+  res.redirect(app.generateUrl(returnTo))
 }
 
 export const signup = (req, res) => {
@@ -46,7 +46,7 @@ export const signup = (req, res) => {
 
   if (!email || !password || !password_confirmation) {
     req.flash('error', 'All fields are required')
-    return res.redirect(req.ladderjs.getUrl('/create-account'))
+    return res.redirect(app.generateUrl('/create-account'))
   }
 
   var newUser = {
@@ -57,9 +57,9 @@ export const signup = (req, res) => {
 
   User.create(newUser)
     .then(function() {
-      res.redirect(req.ladderjs.getUrl('/login'))
+      res.redirect(app.generateUrl('/login'))
       passport.authenticate('local', {
-        successRedirect: req.ladderjs.getUrl('/manager'),
+        successRedirect: app.generateUrl('/manager'),
       })({
         body: {email, password},
       })
@@ -75,6 +75,6 @@ export const signup = (req, res) => {
           break
       }
       req.flash('error', message)
-      res.redirect(req.ladderjs.getUrl('/create-account'))
+      res.redirect(app.generateUrl('/create-account'))
     })
 }

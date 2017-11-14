@@ -1,4 +1,4 @@
-export default (req, res, next) => {
+export default app => (req, res, next) => {
   res.locals = {
     ...res.locals,
     messages: {
@@ -7,7 +7,7 @@ export default (req, res, next) => {
     },
     user: req.user,
     currentUrl: req.originalUrl,
-    getUrl: req.ladderjs.getUrl,
+    generateUrl: app.generateUrl,
   }
 
   next()

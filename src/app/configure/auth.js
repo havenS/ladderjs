@@ -2,18 +2,18 @@ import passport from 'passport'
 import {Strategy as LocalStrategy} from 'passport-local'
 
 export default app => {
-  app.use(passport.initialize())
-  app.use(passport.session())
-
   const {models, ladderjs} = app
   const {config} = ladderjs
   const {model, id, username, password} = config.auth
 
-  const AuthModel = models[model]
   const idField = id
   const usernameField = username
   const passwordField = password
 
+  app.AuthModel = typeof model === 'string' ? models[model] : model
+
+  app.use(passport.initialize())
+  app.use(passport.session())
   passport.use(
     new LocalStrategy(
       {
@@ -21,7 +21,7 @@ export default app => {
         passwordField,
       },
       function(username, password, done) {
-        AuthModel.findOne({
+        app.AuthModel.findOne({
           where: {
             [usernameField]: username,
           },
@@ -45,7 +45,7 @@ export default app => {
   })
 
   passport.deserializeUser(function(id, done) {
-    AuthModel.findOne({
+    app.AuthModel.findOne({
       where: {
         [idField]: id,
       },
@@ -53,4 +53,7 @@ export default app => {
       done(null, user)
     })
   })
+
+  app.login = (...args) => (req, res, next) =>
+    passport.authenticate('local', ...args)(req, res, next)
 }
