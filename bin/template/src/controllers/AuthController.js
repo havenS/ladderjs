@@ -37,7 +37,7 @@ export const logout = (req, res) => {
   res.redirect(app.generateUrl(returnTo))
 }
 
-export const signup = (req, res) => {
+export const signup = (req, res, next) => {
   var email = req.body.email
   var password = req.body.password
   var password_confirmation = req.body.password_confirmation
@@ -58,9 +58,7 @@ export const signup = (req, res) => {
       // res.redirect(app.generateUrl('/login'))
       app.login({
         successRedirect: app.generateUrl('/manager'),
-      })({
-        body: {email, password},
-      })
+      })(req, res, next)
     })
     .catch(error => {
       let message

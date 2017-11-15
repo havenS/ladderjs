@@ -39,17 +39,15 @@ export const logout = (req, res) => {
   res.redirect(app.generateUrl(returnTo))
 }
 
-export const signup = (req, res) => {
-  var email = req.body.email
-  var password = req.body.password
-  var password_confirmation = req.body.password_confirmation
+export const signup = (req, res, next) => {
+  const {email, password, password_confirmation} = req.body
 
   if (!email || !password || !password_confirmation) {
     req.flash('error', 'All fields are required')
     return res.redirect(app.generateUrl('/create-account'))
   }
 
-  var newUser = {
+  const newUser = {
     email,
     password,
     password_confirmation,
@@ -60,9 +58,7 @@ export const signup = (req, res) => {
       res.redirect(app.generateUrl('/login'))
       passport.authenticate('local', {
         successRedirect: app.generateUrl('/manager'),
-      })({
-        body: {email, password},
-      })
+      })(req, res, next)
     })
     .catch(function(error) {
       let message

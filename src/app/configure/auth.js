@@ -12,8 +12,6 @@ export default app => {
 
   app.AuthModel = typeof model === 'string' ? models[model] : model
 
-  app.use(passport.initialize())
-  app.use(passport.session())
   passport.use(
     new LocalStrategy(
       {
@@ -56,4 +54,7 @@ export default app => {
 
   app.login = (...args) => (req, res, next) =>
     passport.authenticate('local', ...args)(req, res, next)
+
+  app.use(passport.initialize())
+  app.use(passport.session())
 }
