@@ -40,6 +40,9 @@ const attributes = {
 const options = {
   freezeTableName: true,
   indexes: [{unique: true, fields: ['email']}],
+  defaultScope: {
+    attributes: {exclude: ['password', 'password_confirmation']},
+  },
 }
 
 const hasSecurePassword = function(user) {

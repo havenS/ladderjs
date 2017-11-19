@@ -5,5 +5,5 @@ export default app => {
       extended: false,
     })
   )
-  app.use(bodyParser.json())
+  app.use(bodyParser.json({strict: false}))
 }

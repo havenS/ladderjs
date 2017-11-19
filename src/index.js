@@ -13,6 +13,7 @@ import configureRequest from './app/configure/request'
 import configureErrors from './app/configure/errors'
 import configureAuth from './app/configure/auth'
 import configureRoutes from './app/router'
+import debugRoutes from './app/configure/debugRoutes'
 
 dotenv.config({path: `${process.cwd()}/.env`})
 
@@ -89,9 +90,11 @@ const ladderjs = conf => {
   configureStyles(ladder)
   configureRequest(ladder)
   configureRoutes(ladder)
+
   configureErrors(ladder)
   configureViews(ladder)
 
+  debugRoutes(ladder, config)
   ladder.start = function() {
     const port = config.port
     this.listen(port)

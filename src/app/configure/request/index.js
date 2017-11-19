@@ -1,6 +1,5 @@
 import handleAssets from './assets'
 import decorateLadderjs from './ladderjs'
-import debugRoutes from './debugRoutes'
 import decorateViewVariables from './viewVariables'
 
 export default app => {
@@ -10,6 +9,4 @@ export default app => {
 
   app.use(decorateLadderjs(app))
   app.use(decorateViewVariables(app))
-
-  debugRoutes(app, config)
 }

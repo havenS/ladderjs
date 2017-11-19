@@ -43,7 +43,7 @@
     "pg": "^7.3.0",
     "pug": "^2.0.0-rc.3",
     "random-id": "^0.0.2",
-    "sequelize": "^4.3.2",
+    "sequelize": "^4.22.6",
     "session-file-store": "^1.1.2",
     "underscore.string": "^3.3.4",
     "validate-npm-package-name": "^3.0.0",
