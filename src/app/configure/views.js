@@ -17,6 +17,7 @@ export default app => {
     ainclude: (
       route,
       id,
+      showLoader = false,
       loadingElement = app.locals.loadingElement,
       errorElement = app.locals.errorElement
     ) => {
@@ -28,7 +29,7 @@ export default app => {
       return `${generate ? `<div id="${id}"></div>` : ''}
       <script type="text/javascript">
       $(function(){
-        $('#${id}').html('${loadingElement}')
+        ${showLoader ? `$('#${id}').html('${loadingElement}')` : ''}
         $.post('/lai', {route: '${route}'})
         .done(function(data){
           $('#${id}').html(data)
