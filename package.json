@@ -1,6 +1,6 @@
 {
   "name": "ladderjs",
-  "version": "0.7.8",
+  "version": "0.7.9",
   "description": "",
   "main": "dist/index.js",
   "author": "Julien Fournier",
@@ -12,8 +12,7 @@
     "start": "node dist",
     "uglify:dist": "uglifyjs-folder dist",
     "build:watch": "babel src --out-dir dist --copy-files --watch",
-    "build":
-      "node scripts/copy_boilerplate_files.js && babel src --out-dir dist --copy-files && minify-all ./dist",
+    "build": "node scripts/copy_boilerplate_files.js && babel src --out-dir dist --copy-files && minify-all ./dist",
     "lint": "eslint src",
     "test": "nightwatch"
   },
