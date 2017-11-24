@@ -4,9 +4,6 @@
   "description": "",
   "main": "dist/index.js",
   "author": "Julien Fournier",
-  "engines": {
-    "node": "7.7.2"
-  },
   "bin": {
     "ladderjs": "bin/ladderjs.js"
   },
@@ -15,7 +12,8 @@
     "start": "node dist",
     "uglify:dist": "uglifyjs-folder dist",
     "build:watch": "babel src --out-dir dist --copy-files --watch",
-    "build": "node scripts/copy_boilerplate_files.js && babel src --out-dir dist --copy-files && minify-all ./dist",
+    "build":
+      "node scripts/copy_boilerplate_files.js && babel src --out-dir dist --copy-files && minify-all ./dist",
     "lint": "eslint src",
     "test": "nightwatch"
   },
