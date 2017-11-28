@@ -39,7 +39,9 @@ const defaultOptions = {
   viewsPath: '/views',
   stylesPath: '/public/styles',
   stylesProcessor: 'less',
-  sessionToken: process.env.SESSION_TOKEN || '4564f6s4fdsfdfd',
+  session: {
+    secret: process.env.SESSION_TOKEN || '4564f6s4fdsfdfd',
+  },
 }
 let ladder = {}
 
@@ -73,6 +75,10 @@ const ladderjs = conf => {
     auth: {
       ...defaultOptions.auth,
       ...conf.auth,
+    },
+    session: {
+      ...defaultOptions.session,
+      ...conf.session,
     },
   }
 

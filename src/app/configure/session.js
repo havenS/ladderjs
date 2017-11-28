@@ -7,12 +7,12 @@ export default app => {
 
   app.use(
     session({
-      secret: app.ladderjs.config.sessionToken,
       resave: true,
       saveUninitialized: false,
       store: new (require('nedb-session-store')(session))({
         filename: 'sessions/sessions.db',
       }),
+      ...app.ladderjs.config.session,
     })
   )
 
