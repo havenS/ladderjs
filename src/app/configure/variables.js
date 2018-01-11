@@ -20,9 +20,13 @@ export default (app, config) => {
     if (route[0] && route[0] === '/') {
       return route
     }
-    let routeObj = {}
+    let routeObj = null
     if (typeof route === 'string') {
       routeObj = config.routes.find(({key}) => key === route)
+      if (!routeObj) {
+        app.logger.error(`No route found for key ${route}`)
+        return route
+      }
     } else {
       routeObj = route
     }

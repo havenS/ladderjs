@@ -2,6 +2,7 @@ import winston from 'winston'
 
 export default app => {
   const logger = new winston.Logger({
+    silent: app.ladderjs.config.loggerDisabled,
     level: app.ladderjs.config.loggerLevel,
     transports: [
       new winston.transports.Console({
