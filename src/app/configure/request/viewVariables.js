@@ -4,6 +4,7 @@ export default app => (req, res, next) => {
     messages: {
       error: req.flash('error'),
       success: req.flash('success'),
+      warning: req.flash('warning'),
     },
     user: req.user,
     currentUrl: req.originalUrl,

@@ -12,8 +12,7 @@
     "start": "node dist",
     "uglify:dist": "uglifyjs-folder dist",
     "build:watch": "babel src --out-dir dist --copy-files --watch",
-    "build":
-      "node scripts/copy_boilerplate_files.js && babel src --out-dir dist --copy-files && minify-all ./dist",
+    "build": "node scripts/copy_boilerplate_files.js && babel src --out-dir dist --copy-files && minify-all ./dist",
     "lint": "eslint src",
     "test": "nightwatch"
   },
@@ -59,6 +58,7 @@
     "eslint-plugin-babel": "^4.1.2",
     "minify-all": "^1.2.2",
     "nodemon": "^1.11.0",
-    "prettier-eslint": "^8.2.1"
+    "prettier-eslint": "^8.2.1",
+    "uglifyjs-folder": "^1.5.1"
   }
 }
