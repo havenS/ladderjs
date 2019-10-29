@@ -1,6 +1,6 @@
 {
   "name": "ladderjs",
-  "version": "0.7.12",
+  "version": "0.8.0",
   "description": "",
   "main": "dist/index.js",
   "author": "Julien Fournier",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "bcrypt": "^1.0.2",
+    "bcrypt": "^3.0.6",
     "body-parser": "~1.13.3",
     "commander": "^2.11.0",
     "connect-flash": "~0.1.1",
