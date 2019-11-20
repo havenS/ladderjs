@@ -8,7 +8,7 @@
     "ladderjs": "bin/ladderjs.js"
   },
   "scripts": {
-    "dev": "PORT=3000 nodemon --exec babel-node src -i tests",
+    "dev": "PORT=3000 nodemon --exec babel-node index.js -i tests",
     "start": "node dist",
     "uglify:dist": "uglifyjs-folder dist",
     "build:watch": "babel src --out-dir dist --copy-files --watch",
@@ -33,7 +33,7 @@
     "inquirer": "^3.3.0",
     "md5": "^2.2.1",
     "nedb-session-store": "^1.1.2",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.12.0",
     "node-sass-middleware": "^0.11.0",
     "passport": "^0.4.0",
     "passport-local": "~1.0.0",
