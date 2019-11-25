@@ -10,11 +10,11 @@ export default app => {
     session({
       resave: true,
       saveUninitialized: false,
-      ...sessionConfig,
       store: new (require('nedb-session-store')(session))({
         filename: 'sessions/sessions.db',
         defaultExpiry: sessionConfig.defaultExpiry,
       }),
+      ...sessionConfig,
     })
   )
 
