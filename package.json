@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "bcrypt": "^1.0.2",
+    "bcrypt": "^5.0.0",
     "body-parser": "~1.13.3",
     "commander": "^2.11.0",
     "connect-flash": "~0.1.1",
