@@ -17,7 +17,7 @@
     "test": "nightwatch"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "bcrypt": "^1.0.2",
     "body-parser": "~1.13.3",
     "commander": "^2.11.0",
